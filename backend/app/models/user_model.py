@@ -1,5 +1,6 @@
 from app import db
 
+
 class User:
     def __init__(self, username, password, roles=None):
         self.username = username

@@ -6,6 +6,8 @@ from flask import Flask
 import pymongo
 from dotenv import load_dotenv
 
+from app.routes import user_routes
+
 app = Flask(__name__)
 
 # get the base directory
@@ -32,5 +34,5 @@ else:
     print('Failed to connect to MongoDB')
 
 
-
-from app.routes import user_routes
+app.register_blueprint(user_routes)
+app.register_blueprint(template_routes)

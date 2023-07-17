@@ -3,7 +3,7 @@ from datetime import datetime
 from bson import ObjectId
 
 from app import db
-from app.helpers.constants import TEMPLATE_STATUS
+from app.helpers import TEMPLATE_STATUS
 
 
 class Template:

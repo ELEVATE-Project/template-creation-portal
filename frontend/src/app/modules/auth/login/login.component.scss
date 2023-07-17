@@ -1,0 +1,26 @@
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  width: 400px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.text-field {
+  width: 100%;
+}
+
+.button {
+  width: 100%;
+}
+
+.text-9 {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 10px;
+}

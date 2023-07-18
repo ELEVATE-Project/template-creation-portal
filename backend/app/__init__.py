@@ -37,4 +37,5 @@ else:
     print('Failed to connect to MongoDB')
     sys.exit(1)
 
-register_routes(app)
+
+from app.routes import user_routes

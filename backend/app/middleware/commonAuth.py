@@ -47,7 +47,7 @@ def admin_token_required(f):
     def decorated(*args, **kwargs):
         print("admin_token_required")
         auth = None
-        if "Authorization" in request.headers:
+        if "admin-token" in request.headers:
             auth = request.headers.get('admin-token')
 
         if not auth:

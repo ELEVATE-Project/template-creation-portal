@@ -3,7 +3,6 @@ import os
 import sys
 
 from flask import Flask
-import pymongo
 from dotenv import load_dotenv
 from flask_cors import CORS
 
@@ -11,7 +10,7 @@ from app.database import connectDb
 
 app = Flask(__name__)
 
-# CORS(app)
+CORS(app)
 
 # get the base directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -28,7 +27,7 @@ else:
 mongo_uri = os.environ.get('MONGO_URI')
 database_name = os.environ.get('DATABASE_NAME')
 admin_token = os.environ.get('ADMIN_TOKEN')
-signing_key = os.environ.get('SIGNING_KEY')
+signing_key = os.environ.get('SECRET_KEY')
 db = connectDb(mongo_uri, database_name)
 
 # Verify database connection

@@ -1,26 +1,68 @@
-.login {
-  display: flex;
-  justify-content: center;
+.body {
   align-items: center;
-  height: 100vh;
+}
+.login_card {
+  width: 30%;
+  box-shadow: 1px 1px 5px 5px rgb(216, 216, 216);
 }
 
-.card {
-  width: 400px;
-  padding: 20px;
-  box-sizing: border-box;
+.login_form {
+  display: flex;
+  flex-direction: column;
 }
-
-.text-field {
-  width: 100%;
-}
-
-.button {
-  width: 100%;
-}
-
-.text-9 {
+.login_toolbar {
+  flex: 1 1 auto;
   text-align: center;
-  font-size: 12px;
-  margin-top: 10px;
+  padding: 0%;
+}
+.login_button {
+  background-color: #8b0000cc;
+  color: white;
+}
+.login_button2 {
+  background-color: #008000b5;
+  width: 75%;
+  color: white;
+  text-align: center;
+}
+.login {
+  height: 100%;
+  background: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login_elevate {
+  color: #008000b5;
+}
+h1 {
+  color: #8b0000cc;
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.div_btn2 {
+  flex: 1 1 auto;
+  text-align: center;
+}
+.login_forgotAccount {
+  text-align: center;
+  color: blue;
+}
+.login_forgotAccount:hover {
+  color: red;
+}
+
+.spinner{
+  display:flex;
+  flex-direction: column;
+  gap:20px;
+  padding-top: 15%;
+  align-items: center;
+  justify-content: center;
+}
+.spinner ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #8b0000;
 }

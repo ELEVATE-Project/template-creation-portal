@@ -9,14 +9,12 @@ export class AuthenticationService {
   constructor(private http: HttpClient, private dataService: DataService) { }
 
   login(body: any) {
+    console.log("running");
     const reqParam = {
-      url: 'authenticate',
+      url: 'users/login',
       data: {
-        request: {
-          email: body.email,
+          email_address: body.email_address,
           password: body.password
-        }
-
       }
     }
     return this.dataService.post(reqParam);
@@ -26,19 +24,19 @@ export class AuthenticationService {
     const reqParam = {
       url: 'signup',
       headers:{
-        "admin-token":"16c6a8b5cbad36c887e74eed42454241",
+        "admin-token":"somethingRandom",
         "Content-Type":"application/json"
       },
       data: {
-        request: {
-          email: body.email,
+          first_name: body.first_name,
+          last_name: body.last_name,
+          email_address: body.email_address,
           password: body.password
-        }
       }
     }
     return this.dataService.post(reqParam);
   }
-  
+
   isUserLoggedIn(): boolean {
     if (localStorage.getItem('token')) {
       return true

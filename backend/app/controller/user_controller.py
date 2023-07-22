@@ -38,8 +38,12 @@ class UserController:
     def login():
         try:
             data = request.get_json()
+            print(data)
             email_address = data['email_address']
+            print(email_address)
             password = hashlib.md5(data['password'].encode('utf-8')).hexdigest()
+            print(password)
+
 
             if not UserValidator.is_valid(email_address, password):
                 return error_response('Invalid email_address or password', 400)
@@ -51,7 +55,6 @@ class UserController:
             access_token = None
             if user:
                 try:
-                    print(user['_id'])
                     access_token = generate_token(user['_id'])
                 except Exception as e:
                     raise Exception(str(e))
@@ -59,4 +62,5 @@ class UserController:
             return success_response({'message': 'User logged in successfully', 'user_id': str(user['_id']), access_token: access_token})
         except Exception as e:
             error_message = str(e)
+            print(error_message, 500)
             return error_response(error_message, 500)

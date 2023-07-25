@@ -1,0 +1,75 @@
+.body{
+  align-items: center;
+
+}
+.register_card{
+  width: 25%;
+  box-shadow: 1px 1px 5px 5px rgb(216, 216, 216);
+}
+
+.register_form{
+  display: flex;
+  flex-direction: column;
+}
+.register_toolbar{
+  flex: 1 1 auto;
+  text-align: center;
+  padding: 0%;
+
+
+}
+h2{
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.register_button{
+  background-color: #008000b5;
+  width: 75%;
+  color: white;
+}
+.register{
+  height: 100%;
+  background: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+.login_elevate{
+  color: #008000b5;
+}
+h1{
+  color:  #8b0000cc;
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+
+.div_register_button{
+  flex: 1 1 auto;
+  text-align: center;
+}
+.already-account-login{
+  color: blue;
+  font-size: small;
+  font-weight: 200;
+  text-align:end;
+  padding-bottom: 10px;
+}
+
+
+.spinner{
+  display:flex;
+  flex-direction: column;
+  gap:20px;
+  padding-top: 15%;
+  align-items: center;
+  justify-content: center;
+}
+.spinner ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #8b0000;
+}

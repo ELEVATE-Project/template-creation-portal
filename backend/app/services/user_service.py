@@ -12,3 +12,7 @@ class UserService:
     @staticmethod
     def find_user_by_email_address(email_address):
         return User.find_by_email_address(email_address)
+
+    @staticmethod
+    def get_by_id(user_id):
+        return User.find_by_id(user_id)

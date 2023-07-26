@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from app import db
 
 
@@ -9,7 +11,7 @@ class User:
         self.roles = roles or ['admin']
 
     def save(self):
-        return db.users.insert_one({'email_address': self.email_address, 'password': self.password, 'username': self.username, 'roles': self.roles})
+        return db.users.insert_one({'email_address': self.email_address, 'password': self.password, 'username': self.username, 'roles': self.roles, 'created': datetime.now()})
 
     @staticmethod
     def find_by_email_address(email_address):
@@ -18,3 +20,7 @@ class User:
     @staticmethod
     def find_by_id(user_id):
         return db.users.find_one({'_id': user_id})
+
+    @staticmethod
+    def update_user(user_id, email_address, password, username):
+        return db.users.update_one({'_id': user_id}, {'$set': {'email_address': email_address, 'password': password, 'username': username}})

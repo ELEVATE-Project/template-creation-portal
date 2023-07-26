@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
     if(this.authService.isUserLoggedIn()){
-      this.router.navigate(['/template/template-selection'])
+      this.router.navigate(['/template/template-home-page'])
     }
 
   }
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
         if (resp?.response?.accessToken) {
           this.toastr.success('Login Successful','Success')
           localStorage.setItem('token',resp?.response?.accessToken);
-          this.router.navigate(['/template/template-selection'])
+          this.router.navigate(['/template/template-home-page'])
         }
       }, (error: any) => {
         this.loader = false;

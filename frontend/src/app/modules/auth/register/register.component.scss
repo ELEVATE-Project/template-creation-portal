@@ -3,7 +3,8 @@
 
 }
 .register_card{
-  width: 25%;
+  margin: 50px;
+  width: 100%;
   box-shadow: 1px 1px 5px 5px rgb(216, 216, 216);
 }
 
@@ -13,31 +14,42 @@
 }
 .register_toolbar{
   flex: 1 1 auto;
-  text-align: center;
+  text-align: start;
   padding: 0%;
-
-
 }
 h2{
   font-weight: bold;
   font-size: 1.5rem;
+}
+.my-form-field{
+  margin:10px;
+  height: 60px;
+}
+
+.my-form-field2{
+  margin:10px;
+  height: 20px;
 }
 
 .register_button{
   background-color: #008000b5;
   width: 75%;
   color: white;
+  margin-top: 40px;
+  margin-bottom: 10px;
 }
 .register{
   height: 100%;
-  background: #f7f7f7;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
+  flex-direction: row;
+  align-items: start;
+  justify-content: space-between;
+  padding-right: 10px;
 }
 
+.input-field{
+  height: 10px;
+}
 
 .login_elevate{
   color: #008000b5;
@@ -50,15 +62,14 @@ h1{
 
 
 .div_register_button{
-  flex: 1 1 auto;
   text-align: center;
 }
 .already-account-login{
   color: blue;
   font-size: small;
   font-weight: 200;
-  text-align:end;
-  padding-bottom: 10px;
+  text-align:center;
+  margin-bottom: 5px;
 }
 
 
@@ -72,4 +83,11 @@ h1{
 }
 .spinner ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
   stroke: #8b0000;
+}
+
+.register-page{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px ;
 }

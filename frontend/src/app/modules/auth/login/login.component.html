@@ -3,46 +3,51 @@
 </div>
 
 <div class="login" *ngIf="!loader">
+  <div class="image">
+    <img src="./assets/imagec4gt.png" alt="imageofstudentstudying">
+  </div>
+  <div class="login-page">
   <div>
     <h1>ELE<span class="login_elevate">VA</span>TE</h1>
   </div>
   <br />
-
   <mat-card class="login_card">
     <form class="login_form"  name="loginForm" [formGroup]="loginForm">
       <span class="login_toolbar">
-        <h2>Login To ELEVATE</h2>
+        <h2>Welcome Back !</h2>
       </span>
       <mat-form-field appearance="outline" class="my-form-field">
-        <mat-label>Email</mat-label>
-        <input formControlName="email_address" matInput placeholder="Enter email address" required />
-        <mat-error *ngIf="!loginForm.controls['email_address'].valid">
+        <mat-label>Email id</mat-label>
+        <input formControlName="email_address" matInput placeholder="Enter email address" class="input-field" required />
+        <mat-error *ngIf="!loginForm.controls['email_address'].valid" class="error-message">
           Enter Valid Email
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="my-form-field">
-        <mat-label>Password</mat-label>
+      <mat-form-field appearance="outline" class="my-form-field2">
+        <mat-label>*****</mat-label>
         <input formControlName="password" matInput [type]="hide ? 'text' : 'password'" required
-               placeholder="Enter valid password" />
+               placeholder="" />
         <button mat-icon-button matSuffix (click)="hide = !hide">
-          <mat-icon>
-            {{ hide ? "visibility_off" : "visibility" }}
-          </mat-icon>
+<!--          <mat-icon>-->
+<!--            {{ hide ? "visibility_off" : "visibility" }}-->
+<!--          </mat-icon>-->
         </button>
-        <mat-error *ngIf="!loginForm.controls['password'].valid">
+        <mat-error *ngIf="!loginForm.controls['password'].valid" class="error-message">
           Enter Valid Password
         </mat-error>
       </mat-form-field>
+
+      <div class="div_btn2">
       <button mat-raised-button type="submit" class="login_button" (click)="onLogin()">
         Login
       </button>
-      <br />
-      <div class="div_btn2">
-        <button mat-raised-button type="submit" class="login_button2" (click)="goToRegister()">
-          Create New Account
-        </button>
       </div>
+        <div class="register-account-download" (click)="goToRegister()">
+          Don't have an Account ? Signup
+        </div>
+
     </form>
   </mat-card>
+</div>
 </div>

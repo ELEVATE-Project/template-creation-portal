@@ -3,6 +3,10 @@
 </div>
 
 <div class="register" *ngIf="!loader">
+  <div class="image">
+    <img src="./assets/imagec4gt.png" alt="imageofstudentstudying">
+  </div>
+  <div class="register-page">
   <div>
     <h1>ELE<span class="login_elevate">VA</span>TE</h1>
   </div><br>
@@ -10,40 +14,43 @@
 
     <form class="register_form" (ngSubmit)="onRegister()" name="registerForm" [formGroup]="registerForm">
       <mat-toolbar> <span class="register_toolbar">
-          <h2>Sign Up</h2>
+          <h2>Get Started !</h2>
         </span></mat-toolbar>
 
       <mat-form-field appearance="outline" class="my-form-field">
         <mat-label>Email</mat-label>
-        <input matInput formControlName="email" name="email">
+        <input matInput formControlName="email" name="email" class="input-field">
         <mat-error *ngIf="!registerForm.controls['email'].valid">
           Enter Valid Email
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="my-form-field">
+      <mat-form-field appearance="outline" class="my-form-field2">
         <mat-label>Password</mat-label>
         <input matInput formControlName="password" name="password" type="password"
-               [type]=" hidepassword ?'text' : 'password'" required placeholder="Enter valid password">
+               [type]=" hidepassword ?'text' : 'password'" required placeholder="Enter valid password" class="input-field">
         <button mat-icon-button matSuffix (click)="hidepassword = !hidepassword">
-          <mat-icon>
-            {{hidepassword ? 'visibility_off' : 'visibility'}}
-          </mat-icon>
+<!--          <mat-icon>-->
+<!--            {{hidepassword ? 'visibility_off' : 'visibility'}}-->
+<!--          </mat-icon>-->
         </button>
         <mat-error *ngIf="!registerForm.controls['password'].valid">
           Enter Valid Password
         </mat-error>
       </mat-form-field>
 
+
+      <div class="div_register_button">
+        <button mat-raised-button type="submit" class="register_button" (click)="onRegister()">Sign Up</button>
+      </div>
+
       <div class="already-account-login" (click)="onClickAlreadyAccountLogin()">
         Already have an account? login
-      </div>
-      <div class="div_register_button">
-        <button mat-raised-button type="submit" class="register_button">Sign Up</button>
       </div>
 
     </form>
 
 
   </mat-card>
+</div>
 </div>

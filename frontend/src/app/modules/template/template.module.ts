@@ -6,7 +6,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { SharedModule } from '../shared/shared.module';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
-import { TemplateHomePageComponent } from './template-home-page/template-home-page.component'
+import { TemplateHomePageComponent } from './template-homepage/template-homepage.component'
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TemplateHomePageComponent } from './template-home-page/template-home-pa
     MatTooltipModule,
     SharedModule,
     MatProgressSpinnerModule,
-    MatIconModule
+    MatIconModule,
+    FlexLayoutModule
   ]
 })
 export class TemplateModule { }

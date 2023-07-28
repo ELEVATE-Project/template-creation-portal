@@ -11,6 +11,7 @@ import {TemplateModule} from "./modules/template/template.module";
 import {MaterialModule} from "./material.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {ToastrModule} from "ngx-toastr";
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,48 +1,32 @@
-<div *ngIf="loader" class="spinner">
-  <mat-spinner  [diameter]="70"></mat-spinner>
-</div>
-
-<div class="login" *ngIf="!loader">
-  <div>
-    <h1>ELE<span class="login_elevate">VA</span>TE</h1>
-  </div>
-  <br />
-
-  <mat-card class="login_card">
-    <form class="login_form"  name="loginForm" [formGroup]="loginForm">
-      <span class="login_toolbar">
-        <h2>Login To ELEVATE</h2>
-      </span>
-      <mat-form-field appearance="outline" class="my-form-field">
-        <mat-label>Email</mat-label>
-        <input formControlName="email_address" matInput placeholder="Enter email address" required />
-        <mat-error *ngIf="!loginForm.controls['email_address'].valid">
-          Enter Valid Email
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="my-form-field">
-        <mat-label>Password</mat-label>
-        <input formControlName="password" matInput [type]="hide ? 'text' : 'password'" required
-               placeholder="Enter valid password" />
-        <button mat-icon-button matSuffix (click)="hide = !hide">
-          <mat-icon>
-            {{ hide ? "visibility_off" : "visibility" }}
-          </mat-icon>
-        </button>
-        <mat-error *ngIf="!loginForm.controls['password'].valid">
-          Enter Valid Password
-        </mat-error>
-      </mat-form-field>
-      <button mat-raised-button type="submit" class="login_button" (click)="onLogin()">
-        Login
-      </button>
-      <br />
-      <div class="div_btn2">
-        <button mat-raised-button type="submit" class="login_button2" (click)="goToRegister()">
-          Create New Account
-        </button>
+<div fxLayout="row">
+    <div class="auth-background"></div>
+    <div class="container" fxLayoutAlign="center stretch" fxLayout="column">
+      <div fxLayout="column" fxLayoutAlign="center space-evenly">
+        <mat-card>
+        <div>
+          <h1>
+            Welcome Back !
+          </h1>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="center">
+          <div fxFlex="100" fxFlex.sm="80" fxFlex.xs="95" fxLayout="column">
+            <app-dynamic-form [jsonFormData]="formData" #loginForm fxFlex="100" (onEnter)="onSubmit()"></app-dynamic-form>
+            <button mat-raised-button color="primary" [disabled]="!loginForm.myForm.valid" class="btn login"
+              (click)="onSubmit()" fxFlex="100">
+              Login 
+            </button>
+            <div  fxLayout="column" fxLayoutAlign="space-between center" class="wrapper" >
+              <mat-checkbox class="remember-me" [(ngModel)]="rememberMe">
+                Remember Me
+              </mat-checkbox>
+              <a routerLink="/auth/register" class="forgot-password">Don't you have an account? Sign Up</a>
+            </div>
+          </div>
+        </div>
+      </mat-card>
       </div>
-    </form>
-  </mat-card>
+    </div>
 </div>
+
+ 
+  

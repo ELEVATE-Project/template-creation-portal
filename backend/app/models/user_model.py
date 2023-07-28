@@ -2,18 +2,18 @@ from app import db
 
 
 class User:
-    def __init__(self, email_address, password, username, roles=None):
-        self.email_address = email_address
+    def __init__(self, email, password, username, roles=None):
+        self.email = email
         self.password = password
         self.username = username
         self.roles = roles or ['admin']
 
     def save(self):
-        return db.users.insert_one({'email_address': self.email_address, 'password': self.password, 'username': self.username, 'roles': self.roles})
+        return db.users.insert_one({'email': self.email, 'password': self.password, 'username': self.username, 'roles': self.roles})
 
     @staticmethod
-    def find_by_email_address(email_address):
-        return db.users.find_one({'email_address': email_address})
+    def find_by_email(email):
+        return db.users.find_one({'email': email})
 
     @staticmethod
     def find_by_id(user_id):

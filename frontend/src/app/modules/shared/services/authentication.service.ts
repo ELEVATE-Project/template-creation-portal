@@ -1,28 +1,45 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from '../data/data.service';
-
+import { API_CONSTANTS } from 'src/app/core/constants/apiUrlConstants';
+import { LocalStorageService } from 'src/app/core/services/local-storage/local-storage.service';
+import { localKeys } from 'src/app/core/constants/localStorage.keys';
+import * as _ from "lodash-es";
+import { map } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  constructor(private http: HttpClient, private dataService: DataService) { }
+  constructor(private http: HttpClient, private dataService: DataService, private toastr: ToastrService, private localStorage: LocalStorageService) { }
 
   login(body: any) {
-    console.log("running");
     const reqParam = {
-      url: 'users/login',
+      url: API_CONSTANTS.ACCOUNT_LOGIN,
       data: {
-          email_address: body.email_address,
+          email: body.email,
           password: body.password
       }
     }
-    return this.dataService.post(reqParam);
+    return this.dataService.post(reqParam).pipe(
+      map(async (result:any) => {
+          this.toastr.success('Login Successful','Success')
+          return await this.setUserInLocal(result);
+      })
+    );
   }
 
+  async setUserInLocal(data:any) {
+    console.log(data)
+    let token = _.pick(data, ['access_token']);
+    await this.localStorage.saveLocalData(localKeys.TOKEN, JSON.stringify(token));
+    await this.localStorage.saveLocalData(localKeys.USER_ID, data.user_id);
+    return data;
+    
+  }
   signup(body: any) {
     const reqParam = {
-      url: 'signup',
+      url: API_CONSTANTS.CREATE_ACCOUNT,
       headers:{
         "admin-token":"somethingRandom",
         "Content-Type":"application/json"
@@ -30,20 +47,21 @@ export class AuthenticationService {
       data: {
           first_name: body.first_name,
           last_name: body.last_name,
-          email_address: body.email_address,
+          email: body.email,
           password: body.password
       }
     }
     return this.dataService.post(reqParam);
   }
 
-  isUserLoggedIn(): boolean {
-    if (localStorage.getItem('token')) {
-      return true
+   isUserLoggedIn(): boolean{
+    if(localStorage.getItem(localKeys.TOKEN)){
+      return true;
     }
     return false;
   }
-logoutAccount() {
+
+  logoutAccount() {
   localStorage.clear();
   }
 

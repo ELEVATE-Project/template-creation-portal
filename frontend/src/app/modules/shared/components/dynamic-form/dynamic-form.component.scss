@@ -1,0 +1,61 @@
+@import "/src/variables";
+
+.form-field-invalid {
+  color: $red !important;
+}
+.form-group {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+mat-form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-error {
+  display: inline-flex;
+  align-items: center;
+  color: $red !important;
+  font-size: 13px;
+}
+.error-icon-info{
+  margin-right: 5px;
+}
+
+mat-slider{
+  width: 100%;
+}
+::ng-deep .mat-form-field-label span{
+  color: $red;
+  font-size: 20px;
+  margin-left: 5px;
+}
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: $white;
+}
+mat-label {
+  color: $black;
+}
+.large {
+  font-size: 24px;
+}
+.field-large {
+  margin-top: 14px;
+}
+.mat-select-value-text {
+  font-size: 16px !important;
+}
+.calender-icon {
+  float: right;
+  color: $grey;
+}
+.date-input {
+  max-width: 65%;
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: $black !important;
+  top: 8px !important;
+}
+::ng-deep .mat-form-field-flex {
+  font-size: 15px;
+}

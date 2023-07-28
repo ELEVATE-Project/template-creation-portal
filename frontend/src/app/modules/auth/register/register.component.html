@@ -1,49 +1,28 @@
-<div *ngIf="loader" class="spinner">
-  <mat-spinner  [diameter]="70"></mat-spinner>
+<div fxLayout="row">
+  <div class="auth-background"></div>
+  <div class="container" fxLayoutAlign="center stretch" fxLayout="column">
+    <div fxLayout="column" fxLayoutAlign="center space-evenly">
+      <mat-card>
+      <div>
+        <h1>
+          Get Started !
+        </h1>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="center">
+        <div fxFlex="100" fxFlex.sm="80" fxFlex.xs="95" fxLayout="column">
+          <app-dynamic-form [jsonFormData]="formData" #registerForm fxFlex="100" (onEnter)="onRegister()"></app-dynamic-form>
+          <button mat-raised-button color="primary" [disabled]="!registerForm.myForm.valid" class="btn login"
+            (click)="onRegister()" fxFlex="100">
+            Sign Up
+          </button>
+          <div  fxLayout="column" fxLayoutAlign="space-between center" class="wrapper" >
+            <a routerLink="/auth/login" class="forgot-password">Already have an account ? Login</a>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    </div>
+  </div>
 </div>
 
-<div class="register" *ngIf="!loader">
-  <div>
-    <h1>ELE<span class="login_elevate">VA</span>TE</h1>
-  </div><br>
-  <mat-card class="register_card">
 
-    <form class="register_form" (ngSubmit)="onRegister()" name="registerForm" [formGroup]="registerForm">
-      <mat-toolbar> <span class="register_toolbar">
-          <h2>Sign Up</h2>
-        </span></mat-toolbar>
-
-      <mat-form-field appearance="outline" class="my-form-field">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" name="email">
-        <mat-error *ngIf="!registerForm.controls['email'].valid">
-          Enter Valid Email
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="my-form-field">
-        <mat-label>Password</mat-label>
-        <input matInput formControlName="password" name="password" type="password"
-               [type]=" hidepassword ?'text' : 'password'" required placeholder="Enter valid password">
-        <button mat-icon-button matSuffix (click)="hidepassword = !hidepassword">
-          <mat-icon>
-            {{hidepassword ? 'visibility_off' : 'visibility'}}
-          </mat-icon>
-        </button>
-        <mat-error *ngIf="!registerForm.controls['password'].valid">
-          Enter Valid Password
-        </mat-error>
-      </mat-form-field>
-
-      <div class="already-account-login" (click)="onClickAlreadyAccountLogin()">
-        Already have an account? login
-      </div>
-      <div class="div_register_button">
-        <button mat-raised-button type="submit" class="register_button">Sign Up</button>
-      </div>
-
-    </form>
-
-
-  </mat-card>
-</div>

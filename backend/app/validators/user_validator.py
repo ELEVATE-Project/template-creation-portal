@@ -3,10 +3,10 @@ import re
 
 class UserValidator:
     @staticmethod
-    def is_valid(email_address, password):
-        if not UserValidator.validate_email_regex(email_address):
+    def is_valid(email, password):
+        if not UserValidator.validate_email_regex(email):
             return False
-        if not email_address or not password:
+        if not email or not password:
             return False
         return True
 

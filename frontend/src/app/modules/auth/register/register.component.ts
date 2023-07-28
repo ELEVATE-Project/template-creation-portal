@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -10,6 +10,7 @@ import {
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../shared/services/authentication.service';
 import { ToastrService } from 'ngx-toastr';
+import { DynamicFormComponent } from '../../shared/components';
 
 @Component({
   selector: 'app-register',
@@ -17,65 +18,72 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  hidepassword: boolean = false;
-  loader:any =false;
-  hideconformpassword: boolean = false;
-  form: FormGroup = new FormGroup({});
-  public registerForm: FormGroup = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: [
-      '',
-      [
-        Validators.required,
-        Validators.pattern('^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$'),
-      ],
-    ],
-  });
+  @ViewChild('registerForm') registerForm!: DynamicFormComponent;
+  controls: any = {
+    controls: [
+      {
+        name: 'first_name',
+        label: 'First Name',
+        value: '',
+        type: 'text',
+        placeHolder: 'First Name',
+        errorMessage:'Please enter your first name',
+        validators: {
+          required: true,
+          pattern: '/^[a-z ,.\'-]+$/i'
+        },
+      },
+      {
+        name: 'last_name',
+        label: 'Last Name',
+        value: '',
+        type: 'text',
+        placeHolder: 'Last Name',
+        errorMessage:'Please enter last name',
+        validators: {
+          required: true,
+          pattern: '/^[a-z ,.\'-]+$/i'
+        },
+      },
+      {
+        name: 'password',
+        label: 'Password',
+        value: '',
+        type: 'password',
+        placeHolder: 'Enter password',
+        errorMessage: 'Please enter your registered password',
+        validators: {
+          required: true,
+          minLength: 8,
+          pattern: "^[a-zA-Z0-9!@#%$&~*^()\\-`.+,/\"]*$"
+        },
+      },
+    ]
+  };
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthenticationService, private toastr: ToastrService) { }
+  formData: any = {controls: []}
 
-  ngOnInit() { }
-  onClickAlreadyAccountLogin(){
-    this.router.navigate(['/auth/login'])
+
+  constructor(private router: Router, private authService: AuthenticationService, private toastr: ToastrService) { 
+    
   }
+
+  ngOnInit() {
+    
+   }
+
   onRegister() {
-    if (!this.registerForm.valid) {
-      return;
-    }
-    this.loader = true;
-    this.authService.signup(this.registerForm.value)
+    let fromJson = this.registerForm.myForm.value;
+    if(this.registerForm.myForm.valid){
+      this.authService.signup(fromJson)
       .subscribe((resp: any) => {
-        this.loader = false;
         if (resp?.status === 200) {
           this.toastr.success(resp?.response, 'Success')
           this.router.navigate(['/auth/login'])
         }
       }, (error: any) => {
-        this.loader = false;
         this.toastr.error(error, 'Error')
       })
-
-
+    }
   }
-}
-
-export function ConfirmedValidator(
-  controlName: string,
-  matchingControlName: string
-) {
-  return (formGroup: FormGroup) => {
-    const control = formGroup.controls[controlName];
-    const matchingControl = formGroup.controls[matchingControlName];
-    if (
-      matchingControl.errors &&
-      !matchingControl.errors['confirmedValidator']
-    ) {
-      return;
-    }
-    if (control.value !== matchingControl.value) {
-      matchingControl.setErrors({ confirmedValidator: true });
-    } else {
-      matchingControl.setErrors(null);
-    }
-  };
 }

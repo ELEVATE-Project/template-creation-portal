@@ -45,11 +45,9 @@ def token_required(f):
 def admin_token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        print("admin_token_required")
         auth = None
         if "admin-token" in request.headers:
             auth = request.headers.get('admin-token')
-
         if not auth:
             return {
                 "message": "Authentication Token is missing!",

@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../../shared/services/authentication.service";
 import {DataService} from "../../shared/data/data.service";
 import {ToastrService} from "ngx-toastr";
+import { DynamicFormComponent } from '../../shared/components/dynamic-form/dynamic-form.component';
+import { LocalStorageService } from 'src/app/core/services/local-storage/local-storage.service';
+import { localKeys } from 'src/app/core/constants/localStorage.keys';
 
 @Component({
   selector: 'app-login',
@@ -11,49 +13,80 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  hide: boolean = false;
-  reactiveForm: any;
-  loader:any = false;
-  public loginForm: FormGroup = this.fb.group({
-    email_address: ['', [Validators.required, Validators.email]],
-    password: [
-      '',
-      [
-        Validators.required,
-        Validators.pattern('^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,}$'),
-      ],
-    ],
-  });
-
-  constructor(private fb: FormBuilder, private router: Router,
-              private authService: AuthenticationService, private toastr: ToastrService, private dataService:DataService) { }
+  @ViewChild('loginForm') loginForm!: DynamicFormComponent;
+  
+  rememberMe:boolean = false;
+  isValid: boolean = false;
+  controls:any = {
+    controls: [
+      {
+        name: 'email',
+        labels: 'Email Id',
+        value: '',
+        type: 'email',
+        placeHolder: 'abc@example.com',
+        errorMessage: 'Please enter registered email id',
+        validators: {
+          required: true,
+          pattern: '[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,3}'
+        },
+      },
+      {
+        name: 'password',
+        label: 'Password',
+        value: '',
+        type: 'password',
+        placeHolder: 'Enter password',
+        errorMessage: 'Please enter your registered password',
+        validators: {
+          required: true,
+          minLength: 8,
+          pattern: "^[a-zA-Z0-9!@#%$&~*^()\\-`.+,/\"]*$"
+        },
+      },
+    ]
+  };
+  
+  formData :any= {controls: []}
+  constructor(private router: Router,
+              private authService: AuthenticationService,private toastr: ToastrService, private localStorage: LocalStorageService, private dataService:DataService) { }
 
   ngOnInit() {
-
-    if(this.authService.isUserLoggedIn()){
-      this.router.navigate(['/template/template-selection'])
+    this.isValid = this.loginForm?.myForm.valid
+    var userLoggedIn : boolean = this.authService.isUserLoggedIn();
+    if(userLoggedIn){
+      this.router.navigate(['/template/template-homepage'])
+    }else{
+      this.getSavedDetails();
     }
 
   }
 
+  async getSavedDetails() {
+    const savedDetails = await this.localStorage.getLocalData(localKeys.REMEMBER_ME);
+    let details: any = null;
+    if(savedDetails){
+      details = JSON.parse(atob(savedDetails));
+    }
 
-  onLogin() {
-    console.log("here");
-    // if (!this.loginForm.valid) {
-    //   return;
-    // }
-    this.loader = true;
-    this.authService.login(this.loginForm.value)
+    for(const control of this.controls.controls){
+      control["value"] = details ? details[details.type]: '';
+      
+    }
 
-      .subscribe((resp: any) => {
-        this.loader = false;
-        if (resp?.response?.accessToken) {
-          this.toastr.success('Login Successful','Success')
-          localStorage.setItem('token',resp?.response?.accessToken);
-          this.router.navigate(['/template/template-selection'])
-        }
+    this.formData.controls  = this.controls.controls;
+
+  }
+
+
+  onSubmit() {
+    this.authService.login(this.loginForm.myForm.value).subscribe((resp: any) => {
+      console.log(resp);
+          if(this.rememberMe){
+          this.localStorage.saveLocalData(localKeys.REMEMBER_ME, btoa(JSON.stringify(this.loginForm.myForm.value)));
+          }
+          this.router.navigate(['/template/template-homepage'])
       }, (error: any) => {
-        this.loader = false;
         this.toastr.error(error,'Error')
       })
 

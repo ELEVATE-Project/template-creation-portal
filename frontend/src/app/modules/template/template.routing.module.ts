@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {TemplateHomePageComponent} from "./template-home-page/template-home-page.component";
+import {TemplateHomePageComponent} from "./template-homepage/template-homepage.component";
 
 
 

@@ -5,4 +5,5 @@ node_modules
 frontend/.idea
 frontend/node_modules
 frontend/.vscode
-/__pycache__
+
+.conda

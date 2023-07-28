@@ -17,18 +17,18 @@ class UserController:
     def signup():
         try:
             data = request.get_json()
-            email_address = data['email_address']
+            email = data['email']
             password = hashlib.md5(data['password'].encode('utf-8')).hexdigest()
             first_name = data['first_name']
             last_name = data['last_name']
             username = first_name + ' ' + last_name
-            if not UserValidator.is_valid(email_address, password):
-                return error_response('Invalid email_address or password', 400)
+            if not UserValidator.is_valid(email, password):
+                return error_response('Invalid email or password', 400)
 
-            if UserService.find_user_by_email_address(email_address):
-                return error_response('email_address already exists', 409)
+            if UserService.find_user_by_email(email):
+                return error_response('email already exists', 409)
 
-            user_id = UserService.create_user(email_address, password, username)
+            user_id = UserService.create_user(email, password, username)
             return success_response({'message': 'User created successfully', 'user_id': str(user_id)})
         except Exception as e:
             error_message = str(e)
@@ -39,18 +39,18 @@ class UserController:
         try:
             data = request.get_json()
             print(data)
-            email_address = data['email_address']
-            print(email_address)
+            email = data['email']
+            print(email)
             password = hashlib.md5(data['password'].encode('utf-8')).hexdigest()
             print(password)
 
 
-            if not UserValidator.is_valid(email_address, password):
-                return error_response('Invalid email_address or password', 400)
+            if not UserValidator.is_valid(email, password):
+                return error_response('Invalid email or password', 400)
 
-            user = UserService.find_user_by_email_address(email_address)
+            user = UserService.find_user_by_email(email)
             if not user or user['password'] != password:
-                return error_response('Invalid email_address or password', 401)
+                return error_response('Invalid email or password', 401)
 
             access_token = None
             if user:
@@ -59,7 +59,7 @@ class UserController:
                 except Exception as e:
                     raise Exception(str(e))
 
-            return success_response({'message': 'User logged in successfully', 'user_id': str(user['_id']), access_token: access_token})
+            return success_response({'message': 'User logged in successfully', 'user_id': str(user['_id']), "access_token": access_token})
         except Exception as e:
             error_message = str(e)
             print(error_message, 500)

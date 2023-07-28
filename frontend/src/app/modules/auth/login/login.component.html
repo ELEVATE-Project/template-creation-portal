@@ -11,9 +11,9 @@
         <div fxLayout="column" fxLayoutAlign="center">
           <div fxFlex="100" fxFlex.sm="80" fxFlex.xs="95" fxLayout="column">
             <app-dynamic-form [jsonFormData]="formData" #loginForm fxFlex="100" (onEnter)="onSubmit()"></app-dynamic-form>
-            <button mat-raised-button color="primary" [disabled]="!loginForm.myForm.valid" class="btn login"
+            <button mat-raised-button color="primary" [disabled]="!loginForm.myForm.valid" class="btn-login"
               (click)="onSubmit()" fxFlex="100">
-              Login 
+              <h3>Login</h3>
             </button>
             <div  fxLayout="column" fxLayoutAlign="space-between center" class="wrapper" >
               <mat-checkbox class="remember-me" [(ngModel)]="rememberMe">

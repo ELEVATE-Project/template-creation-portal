@@ -21,12 +21,7 @@ export class AuthenticationService {
           password: body.password
       }
     }
-    return this.dataService.post(reqParam).pipe(
-      map(async (result:any) => {
-          this.toastr.success('Login Successful','Success')
-          return await this.setUserInLocal(result);
-      })
-    );
+    return this.dataService.post(reqParam);
   }
 
   async setUserInLocal(data:any) {

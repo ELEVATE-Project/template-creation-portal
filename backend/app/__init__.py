@@ -39,3 +39,4 @@ else:
 
 
 from app.routes import user_routes
+from app.routes import template_routes

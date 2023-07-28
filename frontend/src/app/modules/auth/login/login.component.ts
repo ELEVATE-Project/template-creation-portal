@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../../shared/services/authentication.service";
 import {DataService} from "../../shared/data/data.service";
@@ -6,6 +6,7 @@ import {ToastrService} from "ngx-toastr";
 import { DynamicFormComponent } from '../../shared/components/dynamic-form/dynamic-form.component';
 import { LocalStorageService } from 'src/app/core/services/local-storage/local-storage.service';
 import { localKeys } from 'src/app/core/constants/localStorage.keys';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -14,9 +15,7 @@ import { localKeys } from 'src/app/core/constants/localStorage.keys';
 })
 export class LoginComponent implements OnInit {
   @ViewChild('loginForm') loginForm!: DynamicFormComponent;
-  
   rememberMe:boolean = false;
-  isValid: boolean = false;
   controls:any = {
     controls: [
       {
@@ -49,10 +48,9 @@ export class LoginComponent implements OnInit {
   
   formData :any= {controls: []}
   constructor(private router: Router,
-              private authService: AuthenticationService,private toastr: ToastrService, private localStorage: LocalStorageService, private dataService:DataService) { }
+              private authService: AuthenticationService,private toastr: ToastrService, private localStorage: LocalStorageService) { }
 
   ngOnInit() {
-    this.isValid = this.loginForm?.myForm.valid
     var userLoggedIn : boolean = this.authService.isUserLoggedIn();
     if(userLoggedIn){
       this.router.navigate(['/template/template-homepage'])
@@ -80,17 +78,11 @@ export class LoginComponent implements OnInit {
 
 
   onSubmit() {
-    this.authService.login(this.loginForm.myForm.value).subscribe((resp: any) => {
-      console.log(resp);
-          if(this.rememberMe){
-          this.localStorage.saveLocalData(localKeys.REMEMBER_ME, btoa(JSON.stringify(this.loginForm.myForm.value)));
-          }
-          this.router.navigate(['/template/template-homepage'])
-      }, (error: any) => {
-        this.toastr.error(error,'Error')
-      })
-
-
+    this.authService.login(this.loginForm.myForm.value)
+    
+    .subscribe((resp: any) =>{
+      this.router.navigate(['/template/template-homepage'])
+    })
   }
 
   goToRegister() {

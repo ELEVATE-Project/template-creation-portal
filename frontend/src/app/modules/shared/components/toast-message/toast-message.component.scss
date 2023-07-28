@@ -1,0 +1,13 @@
+@import "/src/variables";
+
+.info-icon {
+  color: $white;
+  margin-top: 5px;
+}
+:host {
+  display: flex;
+}
+.secret-code{
+  margin-left: 15px;
+  align-self: center;
+}

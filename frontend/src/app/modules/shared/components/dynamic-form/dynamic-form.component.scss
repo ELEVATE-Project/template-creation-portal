@@ -16,10 +16,11 @@ mat-error {
   display: inline-flex;
   align-items: center;
   color: $red !important;
-  font-size: 13px;
+  font-size: 12px;
+  margin-bottom: 10px;
 }
 .error-icon-info{
-  margin-right: 5px;
+  margin: 5px;
 }
 
 mat-slider{
@@ -35,6 +36,7 @@ mat-slider{
 }
 mat-label {
   color: $black;
+  padding-left: 10px;
 }
 .large {
   font-size: 24px;

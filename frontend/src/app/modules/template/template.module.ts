@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
 import { TemplateRoutingModule } from './template.routing.module';
@@ -8,10 +8,13 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
 import { TemplateHomePageComponent } from './template-homepage/template-homepage.component'
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { AppBarComponent } from '../shared/components/app-bar/app-bar.component';
+import { TemplateCreationComponent } from './template-creation/template-creation.component';
 
 @NgModule({
   declarations: [
-    TemplateHomePageComponent
+    TemplateHomePageComponent,
+    TemplateCreationComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +24,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     SharedModule,
     MatProgressSpinnerModule,
     MatIconModule,
-    FlexLayoutModule
-  ]
+    FlexLayoutModule,
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class TemplateModule { }

@@ -6,12 +6,13 @@ import { LocalStorageService } from 'src/app/core/services/local-storage/local-s
 import { localKeys } from 'src/app/core/constants/localStorage.keys';
 import * as _ from "lodash-es";
 import { map } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastService } from 'src/app/core/services/toast/toast.service';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  constructor(private http: HttpClient, private dataService: DataService, private toastr: ToastrService, private localStorage: LocalStorageService) { }
+  constructor(private http: HttpClient, private dataService: DataService, private toastService: ToastService, private localStorage: LocalStorageService) { }
 
   login(body: any) {
     const reqParam = {
@@ -21,14 +22,18 @@ export class AuthenticationService {
           password: body.password
       }
     }
-    return this.dataService.post(reqParam);
+    return this.dataService.post(reqParam).pipe(
+      map(async (result:any) => {
+        this.toastService.showMessage(result.message,'success')
+          return await this.setUserInLocal(result)
+      })
+    );
   }
 
   async setUserInLocal(data:any) {
-    console.log(data)
-    let token = _.pick(data, ['access_token']);
+    let token = _.pick(data.data, ['access_token']);
     await this.localStorage.saveLocalData(localKeys.TOKEN, JSON.stringify(token));
-    await this.localStorage.saveLocalData(localKeys.USER_ID, data.user_id);
+    await this.localStorage.saveLocalData(localKeys.USER_ID, data.data.user_id);
     return data;
     
   }
@@ -46,7 +51,12 @@ export class AuthenticationService {
           password: body.password
       }
     }
-    return this.dataService.post(reqParam);
+    return this.dataService.post(reqParam).pipe(
+      map(async (result:any) => {
+        this.toastService.showMessage(result.message,'success');
+        return await this.setUserInLocal(result);
+      })
+    );
   }
 
    isUserLoggedIn(): boolean{

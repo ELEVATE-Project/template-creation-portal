@@ -18,6 +18,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ToastMessageComponent } from './components/toast-message/toast-message.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AppBarComponent } from './components/app-bar/app-bar.component';
+
 
 
 @NgModule({
@@ -38,14 +42,20 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     FlexLayoutModule,
     MatDividerModule,
     MatSliderModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatSnackBarModule
   ],
   declarations: [
     DynamicFormComponent,
     PopupDialogComponent,
+    ToastMessageComponent,
+    AppBarComponent,
   ],
   exports: [
-    DynamicFormComponent
+    DynamicFormComponent,
+    ToastMessageComponent,
+    MatSnackBarModule,
+    AppBarComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

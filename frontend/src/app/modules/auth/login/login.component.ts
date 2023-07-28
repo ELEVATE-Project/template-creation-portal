@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     controls: [
       {
         name: 'email',
-        labels: 'Email Id',
+        label: 'Email Id',
         value: '',
         type: 'email',
         placeHolder: 'abc@example.com',
@@ -78,11 +78,12 @@ export class LoginComponent implements OnInit {
 
 
   onSubmit() {
-    this.authService.login(this.loginForm.myForm.value)
-    
-    .subscribe((resp: any) =>{
+    this.authService.login(this.loginForm.myForm.value).subscribe(async (response: any) => {
+      if(this.rememberMe){
+        this.localStorage.saveLocalData(localKeys.REMEMBER_ME, btoa(JSON.stringify(this.loginForm.myForm.value)))
+      }
       this.router.navigate(['/template/template-homepage'])
-    })
+    });
   }
 
   goToRegister() {

@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
       },
       {
         name: 'email',
-        labels: 'Email Id',
+        label: 'Email Id',
         value: '',
         type: 'email',
         placeHolder: 'abc@example.com',
@@ -79,17 +79,12 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     let fromJson = this.registerForm.myForm.value;
     if(this.registerForm.myForm.valid){
-      this.authService.signup(fromJson)
-      .subscribe((resp: any) => {
-        if (resp?.status === 200) {
-          this.toastr.success(resp?.response, 'Success')
-          this.router.navigate(['/auth/login'])
-        }
-      }, (error: any) => {
-        this.toastr.error(error, 'Error')
-      })
+      this.authService.signup(fromJson).subscribe((resp: any) => {
+        this.router.navigate(['/auth/login']);
+      });
     }
   }
+
   ngOnInit() {
     var userLoggedIn : boolean = this.authService.isUserLoggedIn();
     if(userLoggedIn){

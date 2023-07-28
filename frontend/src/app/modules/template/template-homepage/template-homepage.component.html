@@ -1,1 +1,32 @@
-<p>template-home-page works!</p>
+<p>
+    <mat-toolbar color="secondary">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Hello, </span>
+      <span class="example-spacer"></span>
+      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar>
+  </p>
+
+  <div fxLayout="column" style="display: flex; padding: 20px; width: 100%; height: 100%; justify-content: space-evenly;" >
+    <mat-card>
+    <mat-form-field>
+        <mat-label>Select an option</mat-label>
+        <mat-select [(value)]="selected">
+          <mat-option value="none">None</mat-option>
+          <mat-option value="programTemplate">Program Template</mat-option>
+          <mat-option value="projectTemplate">Project Template</mat-option>
+          <mat-option value="surveyTemplate">Survey Template</mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      <p>You selected: {{selected}}</p>
+
+      <button mat-raised-button color="primary" (click)="createTemplatePage()">
+        Create 
+      </button>
+    </mat-card>
+    </div>

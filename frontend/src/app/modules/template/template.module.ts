@@ -10,6 +10,7 @@ import { TemplateHomePageComponent } from './template-homepage/template-homepage
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppBarComponent } from '../shared/components/app-bar/app-bar.component';
 import { TemplateCreationComponent } from './template-creation/template-creation.component';
+import { MatStepperModule } from "@angular/material/stepper";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { TemplateCreationComponent } from './template-creation/template-creation
     MatProgressSpinnerModule,
     MatIconModule,
     FlexLayoutModule,
+    MatStepperModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

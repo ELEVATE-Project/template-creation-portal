@@ -8,7 +8,7 @@
         <mat-icon>info</mat-icon>
       </button>
       <span class="example-spacer"></span>
-      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <button mat-icon-button class="example-icon favorite-icon" (click)="backToHomePage()" aria-label="Example icon-button with heart icon">
         <mat-icon>arrow_back
         </mat-icon>
       </button>
@@ -18,6 +18,21 @@
     </mat-toolbar>
   </p>
   
-  <div>
-    <app-dynamic-form #programSheet></app-dynamic-form>
-  </div>
+  <mat-card>
+    
+    <ng-container *ngIf="formsData">
+      <mat-stepper #stepper>
+    <div *ngFor="let sheetData of formsData; index as i" >
+        <mat-step [stepControl]="sheetData" >
+          <ng-template matStepLabel>Fill out your name</ng-template>
+      <app-dynamic-form *ngIf="sheetData" [jsonFormData]="sheetData" #sheets></app-dynamic-form>
+    
+    </mat-step>
+    </div>
+  </mat-stepper>
+  </ng-container>
+  <button style="margin: 20px;" mat-raised-button color="primary" (click)="proceedAndSubmit()">
+    {{buttonActionText}} 
+  </button>
+  
+</mat-card>

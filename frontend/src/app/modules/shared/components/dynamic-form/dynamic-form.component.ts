@@ -5,6 +5,7 @@ import * as _ from "lodash-es";
 import { MatDialog } from '@angular/material/dialog';
 import { PopupDialogComponent } from '../popup-dialog/popup-dialog.component';
 import * as moment from 'moment';
+import { MatDatepickerControl, MatDatepickerPanel } from '@angular/material/datepicker';
 
 
 interface JsonFormValidators {
@@ -68,6 +69,7 @@ export class DynamicFormComponent implements OnInit{
   dependedChildDate: any;
   dependedParent: any;
   dependedParentDate: any;
+  picker: any;
 
   constructor(private fb: FormBuilder, public dialog: MatDialog){}
 

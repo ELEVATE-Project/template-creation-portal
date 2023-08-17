@@ -21,7 +21,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ToastMessageComponent } from './components/toast-message/toast-message.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AppBarComponent } from './components/app-bar/app-bar.component';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { DraftTemplateWidgetComponent } from './components/draft-template-widget/draft-template-widget.component';
 
 
 @NgModule({
@@ -43,19 +44,22 @@ import { AppBarComponent } from './components/app-bar/app-bar.component';
     MatDividerModule,
     MatSliderModule,
     MatSlideToggleModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTooltipModule
   ],
   declarations: [
     DynamicFormComponent,
     PopupDialogComponent,
     ToastMessageComponent,
     AppBarComponent,
+    DraftTemplateWidgetComponent
   ],
   exports: [
     DynamicFormComponent,
     ToastMessageComponent,
     MatSnackBarModule,
-    AppBarComponent
+    AppBarComponent,
+    DraftTemplateWidgetComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

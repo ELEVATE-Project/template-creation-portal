@@ -4,6 +4,10 @@ from app.helpers.success_response import success_response
 class TemplateController:
 
     @staticmethod
+    def getTemplateList():
+        pass
+
+    @staticmethod
     def getDraftTemplate():
         pass
 
@@ -47,6 +51,7 @@ class TemplateController:
                 {
         "name": "username",
         "label": 'Diksha username/user id/email id/phone no. of the Program Designer',
+        "description":"hgh",
         "value": "",
         "class": 'ion-margin',
         "type": 'text',
@@ -127,12 +132,12 @@ class TemplateController:
         "label": 'Targeted role at program level',
         "value": "",
         "class": 'ion-margin',
-        "type": 'text',
+        "type": 'select',
+        "options": [{"label": "a"},{"label": "b"},{"label": "c"}],
         "position": 'floating',
         "errorMessage": 'This field can only contain alphabets',
         "validators":{
-            "required": True,
-            "pattern": '^[a-zA-Z ]*$'
+            "required": True
         }
     },
     {
@@ -174,7 +179,7 @@ class TemplateController:
             {
                 'program_manager_details': [
 {
-         "name": "sso_user",
+        "name": "sso_user",
         "label": 'Is SSO user',
         "value": "",
         "class": 'ion-margin',
@@ -187,29 +192,29 @@ class TemplateController:
         }
     },
     {
-         "name": "login_id_diksha",
+         "name": "start_date",
         "label": 'Start Date of program',
         "value": "",
         "class": 'ion-margin',
-        "type": 'text',
+        "type": 'date',
         "position": 'floating',
-        "errorMessage": 'This field can only contain alphabets',
+        "errorMessage": 'Please select the appropriate date',
         "validators":{
             "required": False,
-            "pattern": '^[a-zA-Z ]*$'
+        
         }
     },
     {
-         "name": "user_id_diksha",
-        "label": 'Start Date of program',
+         "name": "end_date",
+        "label": 'End Date of program',
         "value": "",
         "class": 'ion-margin',
-        "type": 'text',
+        "type": 'date',
         "position": 'floating',
-        "errorMessage": 'This field can only contain alphabets',
+        "errorMessage": 'Please select the appropriate date',
         "validators":{
             "required": False,
-            "pattern": '^[a-zA-Z ]*$'
+        
         }
     }
                 ]

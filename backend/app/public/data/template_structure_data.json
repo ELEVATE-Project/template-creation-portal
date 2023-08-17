@@ -1,0 +1,30 @@
+[
+    {
+        "type": 1,
+        "name": "Program Template",
+        "version": "1.0.0",
+        "sheets": [ "Program Details" , "Resource Details" , "Program Manager Details"],
+        "instructions": {
+            "color_codes": {
+                "78A65A": "Description of each field",
+                "CCDAF5": "Mandatory field",
+                "999999": "Optional field",
+                "F9DA78": "Conditionally Optional Field"
+            }
+        }
+    },
+    {
+        "type": 2,
+        "name": "Project Template",
+        "version": "1.0.0",
+        "sheets": [ "", "", ""],
+        "instructions": {
+            "color_codes": {
+                "78A65A": "Description of each field",
+                "CCDAF5": "Mandatory field",
+                "999999": "Optional field",
+                "F9DA78": "Conditionally Optional Field"
+            }
+        }
+    }
+]

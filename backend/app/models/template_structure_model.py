@@ -12,7 +12,14 @@ class TemplateStructureModel:
 
 
     def save_template(self):
-        return db.templateStructure.insert_one({'template_type': self.template_type, 'no_of_sheets': self.no_of_sheets, 'data_sources': self.data_sources, 'instruction_metadata' :self.instruction_metadata, 'created': self.created})
+        return db.templateStructure.insert_one({'type': self.template_type, 'no_of_sheets': self.no_of_sheets, 'data_sources': self.data_sources, 'instruction_metadata' :self.instruction_metadata, 'created': self.created})
+    
+    @staticmethod
+    def get_template(type):
+        return db.templateStructure.find_one({'type':type})
+    
+    
+
 
         
 

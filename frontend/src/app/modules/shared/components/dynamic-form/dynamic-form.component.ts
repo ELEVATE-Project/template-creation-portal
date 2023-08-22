@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PopupDialogComponent } from '../popup-dialog/popup-dialog.component';
 import * as moment from 'moment';
 import { MatDatepickerControl, MatDatepickerPanel } from '@angular/material/datepicker';
+import { showFieldValidator } from 'src/app/core/utils';
 
 
 interface JsonFormValidators {
@@ -18,6 +19,7 @@ interface JsonFormValidators {
   maxLength?: number;
   pattern?: string;
   nullValidator?: boolean;
+  showFieldValidator?:any;
 }
 export interface JsonFormControlOptions {
   min?: string;
@@ -41,6 +43,16 @@ interface JsonFormControls {
   dependentKey?:string;
   isNumberOnly?: boolean;
   placeHolder?:string;
+}
+
+interface dependentFields {
+  field: string;
+  dependencyLogic: dependentKeyLogic[];
+}
+interface dependentKeyLogic {
+  field: string;
+  values: string[];
+
 }
 export interface DynamicFormData {
   controls: JsonFormControls[];
@@ -70,6 +82,7 @@ export class DynamicFormComponent implements OnInit{
   dependedParent: any;
   dependedParentDate: any;
   picker: any;
+  dependentFieldsLogic: dependentFields[] = [];
 
   constructor(private fb: FormBuilder, public dialog: MatDialog){}
 
@@ -125,6 +138,18 @@ export class DynamicFormComponent implements OnInit{
               validatorsToAdd.push(Validators.nullValidator);
             }
             break;
+          case 'dependency':
+            const dependentFields = value[0];
+            const _dependentField = dependentFields.depends;
+            const dependentFieldValue = dependentFields.value;
+            const dd : dependentKeyLogic[] = [{
+              field: _dependentField,
+              values: dependentFieldValue
+            }]
+            const keyFields : dependentFields = { field : control.name, dependencyLogic: dd}
+            console.log(keyFields);
+            this.dependentFieldsLogic.push(keyFields);
+            break;
           default:
             break;
         }
@@ -135,8 +160,10 @@ export class DynamicFormComponent implements OnInit{
           { value: control.value, disabled: control.disabled || false },
           validatorsToAdd
         )
-      );
+      ); 
     }
+
+    this.setupFieldBDependentLogic();
   }
 
   compareWith(a:any, b:any) {
@@ -145,6 +172,27 @@ export class DynamicFormComponent implements OnInit{
     return JSON.stringify(a) == JSON.stringify(b);
   }
 
+  setupFieldBDependentLogic(){
+    console.log(this.dependentFieldsLogic);
+    this.dependentFieldsLogic.forEach((value: dependentFields) => {
+      const fieldAControl = this.myForm.get(value.field);
+      value.dependencyLogic.forEach((v: dependentKeyLogic) => {
+        const fieldBControl = this.myForm.get(v.field);
+        fieldBControl?.valueChanges.subscribe(newValue => {
+          console.log(newValue);
+          var changedVal: any = _.get(newValue[0], "label", null);
+          console.log(v.values);
+          if(!v.values.includes(changedVal)){
+          fieldAControl?.disable();
+        }else{
+          fieldAControl?.enable();
+
+        }
+        })
+
+      })
+    });
+  }
   onSubmit() {
     console.log(this.myForm.valid, this.myForm.value)
     this.isFormValid();

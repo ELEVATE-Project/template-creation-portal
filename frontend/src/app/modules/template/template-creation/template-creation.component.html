@@ -18,21 +18,22 @@
     </mat-toolbar>
   </p>
   
-  <mat-card>
+
+  <mat-card class="card-form">
     
     <ng-container *ngIf="formsData">
-      <mat-stepper #stepper>
+      <mat-stepper #stepper [selectedIndex]="currentStepIndex">
     <div *ngFor="let sheetData of formsData; index as i" >
         <mat-step [stepControl]="sheetData" >
-          <ng-template matStepLabel>Fill out your name</ng-template>
+          <ng-template matStepLabel>{{convertToTitleCase(list[i])}}</ng-template>
       <app-dynamic-form *ngIf="sheetData" [jsonFormData]="sheetData" #sheets></app-dynamic-form>
     
     </mat-step>
     </div>
   </mat-stepper>
   </ng-container>
-  <button style="margin: 20px;" mat-raised-button color="primary" (click)="proceedAndSubmit()">
-    {{buttonActionText}} 
-  </button>
   
+  <button *ngIf="stepper" style="margin: 20px;" mat-raised-button color="primary" (click)="proceedAndSubmit()">
+    {{ stepper.selectedIndex < formsData.length - 1 ? 'Next' : 'Submit' }}
+  </button>
 </mat-card>

@@ -3,6 +3,7 @@
         <div *ngFor="let control of jsonFormData?.controls" class="form-group">
             <div style="display: flex; justify-items: center; align-items: center; margin-bottom: 5px;">
                 <div>{{control?.label}}</div>
+                <div style="width: 10px;"></div>
                 <mat-icon *ngIf="control?.description" matTooltip={{control?.description}} >info</mat-icon>
             </div>
             <!-- field -->

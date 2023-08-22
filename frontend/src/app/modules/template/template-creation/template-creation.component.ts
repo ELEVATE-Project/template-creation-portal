@@ -6,6 +6,8 @@ import { DataService } from '../../shared/data/data.service';
 import { map } from 'rxjs';
 import * as _ from "lodash-es";
 import { HttpParams } from '@angular/common/http';
+import { convertToTitleCase } from 'src/app/core/utils'; 
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-template-creation',
@@ -13,15 +15,19 @@ import { HttpParams } from '@angular/common/http';
   styleUrls: ['./template-creation.component.scss']
 })
 export class TemplateCreationComponent implements OnInit, AfterViewInit {
+convertToTitleCase(arg0: any) {
+  return convertToTitleCase(arg0);
+}
   @ViewChildren('sheets') sheets!: QueryList<DynamicFormComponent>;
+  @ViewChild('stepper') stepper!: MatStepper;
   // @ViewChild('resourceDetails') resourceDetails!:DynamicFormComponent;
   // @ViewChild('programManagerDetails') programManagerDetails!:DynamicFormComponent;
   type: any;
   sheet: String = 'sheet';
   formsData:any = [];
-  currentSelection: number = 0;
+  list: any = [];
   totalSheets: number = -1;
-  buttonActionText: string = 'Next';
+  currentStepIndex: number = 0;
 
   constructor(private router: Router, private dataService: DataService, private route: ActivatedRoute) {
     
@@ -45,9 +51,10 @@ export class TemplateCreationComponent implements OnInit, AfterViewInit {
     
     this.dataService.get(reqParam, queryParams).subscribe(
       (response) => {
-        var dd : any = response.data
+        var dd : any = response.data.data
+        this.list = response.data.sheet_list
         this.totalSheets = dd.length;
-
+        console.log(this.list);
         this.formsData = [
           { 'controls' : dd[0]['program_details']},
           { 'controls': dd[1]['resource_details']},
@@ -64,9 +71,16 @@ export class TemplateCreationComponent implements OnInit, AfterViewInit {
   }
 
   proceedAndSubmit() {
-    this.currentSelection = (this.currentSelection + 1) % this.totalSheets;
+    if (this.currentStepIndex < this.formsData.length - 1) {
+      this.stepper.next();
+    }
+    else {
+
+    }
   }
+
   backToHomePage(){
     this.router.navigate(['/template/template-homepage']);
   }
+
 }

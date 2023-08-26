@@ -20,13 +20,19 @@ Follow these steps to get the Flask application up and running using Conda.
     cd template-creation-portal
     ```
 
-2. Create a Conda environment using the provided `environment.yml` file:
+2. Go to the backend Directory:
+
+    ```bash
+    cd backend
+    ```
+    
+3. Create a Conda environment using the provided `environment.yml` file:
 
     ```bash
     conda env create -f environment.yml
     ```
 
-3. Activate the Conda environment:
+4. Activate the Conda environment:
 
    On Windows:
 

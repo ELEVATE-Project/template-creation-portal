@@ -18,15 +18,15 @@ export function showFieldValidator(form: FormGroup, fieldName:string, allowedVal
    if(fieldInfo){
     if(!_.isEmpty(fieldInfo?.value)){
     var value: any = _.get(fieldInfo?.value[0], "label", null);
-   console.log(value);
+   
     
     if (allowedValues.includes(value)) {
-      console.log("PASS");
+   
       // Allowed value, no validation error
       return null;
     } else {
       // Not allowed value, return validation error
-      console.log("FAIL");
+      
       return { showFieldError: true };
     }
   }

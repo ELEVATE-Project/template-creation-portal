@@ -1,18 +1,21 @@
 from app import app
 from app.controller.template_controller import TemplateController
+from app.controller.template_form_controller import TemplateFormController
 from app.middleware.commonAuth import token_required
 
 
-@app.route('/api/v1/<user_id>/templates/drafts', methods=['GET'])
+@app.route('/api/v1/templates/drafts', methods=['GET'])
 @token_required
 def getDraftTemplates():
     return TemplateController.getDraftTemplate()
 
 
-@app.route('/api/v1/<user_id>/templates/<template_id>', methods=['GET'])
-@token_required
+
+@app.route('/api/v1/template-form', methods=['GET'])
+# @token_required
 def getTemplate():
-    return TemplateController.getTemplate()
+    print("eeeeee")
+    return TemplateFormController.getTemplateForm()
 
 
 @app.route('/api/v1/<user_id>/templates/', methods=['GET'])

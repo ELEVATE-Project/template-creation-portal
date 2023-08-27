@@ -3,4 +3,5 @@ export const API_CONSTANTS = {
     CREATE_ACCOUNT: 'users/signup',
     PROGRAM_TEMPLATE: 'project-template',
     CREATE_TEMPLATE: 'create-template',
+    TEMPLATE_FORM: 'template-form'
 }

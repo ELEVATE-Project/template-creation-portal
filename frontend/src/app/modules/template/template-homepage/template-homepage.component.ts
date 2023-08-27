@@ -11,22 +11,20 @@ import { AuthenticationService } from '../../shared/services/authentication.serv
 })
 export class TemplateHomePageComponent implements OnInit, AfterViewInit {
 @ViewChild('appBar') appBar!: AppBarComponent
-selected = 'programTemplate';
+selected = 'Program Template';
 
 constructor(private router: Router, private toastService: ToastService, private authService: AuthenticationService) { }
 
 
 ngAfterViewInit(): void {
-  console.log('AA')
 }
 
 ngOnInit(): void {
-  console.log('AA')
 }
 
 
 navigateToCreateTemplatePage() {
-  if(this.selected == 'programTemplate'){
+  if(this.selected == 'Program Template'){
   this.router.navigate(['/template/template-creation'], {queryParams:{type:this.selected}});
 }else{
   this.toastService.showMessage('Please Select Program Template Only');

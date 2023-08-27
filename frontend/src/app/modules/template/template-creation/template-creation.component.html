@@ -22,7 +22,7 @@
   <mat-card class="card-form">
     
     <ng-container *ngIf="formsData">
-      <mat-stepper #stepper [selectedIndex]="currentStepIndex">
+      <mat-stepper #stepper [(selectedIndex)]="currentStepIndex">
     <div *ngFor="let sheetData of formsData; index as i" >
         <mat-step [stepControl]="sheetData" >
           <ng-template matStepLabel>{{convertToTitleCase(list[i])}}</ng-template>
@@ -33,7 +33,7 @@
   </mat-stepper>
   </ng-container>
   
-  <button *ngIf="stepper" style="margin: 20px;" mat-raised-button color="primary" (click)="proceedAndSubmit()">
+  <button *ngIf="stepper" style="margin: 20px;" mat-raised-button color="primary"  [disabled]="!sheets.get(stepper.selectedIndex)?.myForm?.valid" (click)="proceedAndSubmit()">
     {{ stepper.selectedIndex < formsData.length - 1 ? 'Next' : 'Submit' }}
   </button>
 </mat-card>

@@ -147,7 +147,6 @@ export class DynamicFormComponent implements OnInit{
               values: dependentFieldValue
             }]
             const keyFields : dependentFields = { field : control.name, dependencyLogic: dd}
-            console.log(keyFields);
             this.dependentFieldsLogic.push(keyFields);
             break;
           default:
@@ -173,26 +172,26 @@ export class DynamicFormComponent implements OnInit{
   }
 
   setupFieldBDependentLogic(){
-    console.log(this.dependentFieldsLogic);
+    
     this.dependentFieldsLogic.forEach((value: dependentFields) => {
       const fieldAControl = this.myForm.get(value.field);
       value.dependencyLogic.forEach((v: dependentKeyLogic) => {
         const fieldBControl = this.myForm.get(v.field);
         fieldBControl?.valueChanges.subscribe(newValue => {
-          console.log(newValue);
+          
           var changedVal: any = _.get(newValue[0], "label", null);
-          console.log(v.values);
+          
           if(!v.values.includes(changedVal)){
           fieldAControl?.disable();
         }else{
           fieldAControl?.enable();
-
         }
         })
 
       })
     });
   }
+  
   onSubmit() {
     console.log(this.myForm.valid, this.myForm.value)
     this.isFormValid();

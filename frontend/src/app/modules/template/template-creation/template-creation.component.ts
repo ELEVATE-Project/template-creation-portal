@@ -41,9 +41,9 @@ convertToTitleCase(arg0: any) {
 
   getTemplateDetails() {
     let queryParams = new HttpParams();
-    // queryParams = queryParams.append("type",this.type);
+    queryParams = queryParams.append("type",this.type);
     const reqParam = {
-      url: API_CONSTANTS.PROGRAM_TEMPLATE,
+      url: API_CONSTANTS.TEMPLATE_FORM,
       headers:{
         "Content-Type":"application/json"
       },
@@ -51,31 +51,25 @@ convertToTitleCase(arg0: any) {
     
     this.dataService.get(reqParam, queryParams).subscribe(
       (response) => {
-        var dd : any = response.data.data
-        this.list = response.data.sheet_list
-        this.totalSheets = dd.length;
-        console.log(this.list);
-        this.formsData = [
-          { 'controls' : dd[0]['program_details']},
-          { 'controls': dd[1]['resource_details']},
-          {'controls': dd[2]['program_manager_details']}
-          
-        ]
-      
-        console.log(this.formsData);
-        console.log(this.sheets)
-        
-
+        var sheetsData : any = response.data.data
+        this.totalSheets = sheetsData.length ;
+        console.log(sheetsData)
+        sheetsData.forEach((element: { columns: any; name: string, multipleRowsAllowed: boolean, required: boolean }) => {
+          this.formsData.push({"controls": element.columns});
+          this.list.push(element.name)
+        });
       }
     );
   }
 
   proceedAndSubmit() {
-    if (this.currentStepIndex < this.formsData.length - 1) {
+    if (this.stepper.selectedIndex < this.totalSheets - 1) {
       this.stepper.next();
     }
     else {
-
+     this.sheets.forEach((i) => {
+      console.log(i.myForm);
+     })
     }
   }
 

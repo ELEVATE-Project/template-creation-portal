@@ -1,8 +1,9 @@
 
 import datetime
 from app import db
+import json
 
-class TemplateStructureModel:
+class TemplateForm:
     def __init__(self, template_type, no_of_sheets, data_sources= [], instruction_metadata={}):
         self.template_type = template_type
         self.no_of_sheets = no_of_sheets
@@ -12,11 +13,13 @@ class TemplateStructureModel:
 
 
     def save_template(self):
-        return db.templateStructure.insert_one({'type': self.template_type, 'no_of_sheets': self.no_of_sheets, 'data_sources': self.data_sources, 'instruction_metadata' :self.instruction_metadata, 'created': self.created})
+        return db.templateForm.insert_one({'type': self.template_type, 'no_of_sheets': self.no_of_sheets, 'data_sources': self.data_sources, 'instruction_metadata' :self.instruction_metadata, 'created': self.created})
     
     @staticmethod
-    def get_template(type):
-        return db.templateStructure.find_one({'type':type})
+    def get_template(name):
+        templateForm = db.templateForm.find_one({'name':name})
+        return templateForm
+
     
     
 

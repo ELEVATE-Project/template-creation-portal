@@ -7,3 +7,12 @@ frontend/node_modules
 frontend/.vscode
 
 .conda
+
+backend/.env
+backend/.env.prod
+
+
+*/__pycache__
+
+*.pyc
+__pycache__/

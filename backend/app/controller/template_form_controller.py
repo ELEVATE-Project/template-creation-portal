@@ -10,12 +10,9 @@ class TemplateFormController:
 
     @staticmethod
     def getTemplateForm():
-        print("here")
         try:
             type = request.args.get('type')
-            print(type)
             templateForm = TemplateFormService.get_template(type)
-            print(templateForm)
             return success_response(templateForm)
             
         except Exception as e:

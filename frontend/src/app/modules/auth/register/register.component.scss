@@ -1,0 +1,61 @@
+@import "/src/variables";
+
+.auth-background {
+    display: flex;
+    width: 70%;
+    height: 100vh;
+    background-image: url("../../../../assets/images/auth-background.jpg");
+    background-size:cover;
+    background-repeat:no-repeat;
+}
+
+
+// .center-wrapped-container {
+//     display: inline-block;
+//     justify-content: center;
+//     align-items: center;
+//     margin: 20px;
+// }
+
+mat-card {
+    box-shadow: 0px 0px 8px 8px rgba(0, 0, 0, 0.1); 
+    padding: 0px 20px 40px 20px;
+}
+
+// .column-container {
+//     display: flex;
+//     height: 400px;
+// }
+
+// .btn-login {
+//     background-color: green;
+//     color: white;
+// }
+
+.input {
+  margin: 10px;
+}
+
+.container {
+    margin: auto;
+}
+.container h1 {
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 2px;
+  color: $theme;
+}
+
+.wrapper{
+  padding-top: 3%;
+}
+
+.line {
+  flex: 1;
+}
+.text {
+  padding: 0 7%;
+}
+.remember-me {
+  margin: auto;
+}

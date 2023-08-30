@@ -1,0 +1,54 @@
+@import '@angular/material/theming';
+
+// Be sure that you only ever include 'mat-core' mixin once!
+// it should not be included for each theme.
+@include mat-core();
+
+$sb-brand: (
+  50: #F0E4E3,
+  100: #DABDB9,
+  200: #C1918A,
+  300: #A8645B,
+  400: #964338,
+  500: #832215,
+  600: #7B1E12,
+  700: #70190F,
+  800: #66140C,
+  900: #530C06,
+  A100: #FF8C86,
+  A200: #FF5B53,
+  A400: #FF2A20,
+  A700: #FF1207,
+  contrast: (50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: $black-87-opacity,
+    A200: $black-87-opacity,
+    A400: $black-87-opacity,
+    A700: white,
+  )
+);
+
+$sb-palette-primary: mat-palette($sb-brand);
+$sb-palette-accent: mat-palette($sb-brand);
+
+$sb-theme: mat-light-theme($sb-palette-primary, $sb-palette-accent);
+
+@include angular-material-theme($sb-theme);
+
+.success {
+  background-color: #39a464;
+  color: white;
+}
+
+.error {
+  background-color: #ee0b0b;
+  color: white;
+}

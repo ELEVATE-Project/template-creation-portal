@@ -1,0 +1,13 @@
+<mat-icon class="mat-cancel-icon" [mat-dialog-close]="false">cancel_circle_outline</mat-icon>
+<mat-label mat-dialog-title>{{dialogueData?.header}}</mat-label>
+<mat-label mat-dialog-title class="sub-header">{{dialogueData?.subHeader }}<span *ngIf="dialogueData?.subHeader" class="star-required">*</span></mat-label>
+<div mat-dialog-content>
+  <mat-form-field appearance="outline">
+    <input matInput [(ngModel)]="data" [required]="dialogueData?.required" [maxlength]="50" oninput="this.value = this.value.replace(/[\p{L}0-9]|^ /g,'')">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between">
+  <button mat-raised-button class="btn" [mat-dialog-close]="false">{{"CANCEL"}}</button>
+  <button mat-raised-button class="btn btn-primary" [mat-dialog-close]="data" cdkFocusInitial>{{"OK"}}</button>
+</div>
+

@@ -23,6 +23,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AppBarComponent } from './components/app-bar/app-bar.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DraftTemplateWidgetComponent } from './components/draft-template-widget/draft-template-widget.component';
+import { InputChipComponent } from './components/input-chip/input-chip.component';
+import { InputDialogueBoxComponent } from './components/dialogue-box/dialogue-box.component';
 
 
 @NgModule({
@@ -33,6 +35,7 @@ import { DraftTemplateWidgetComponent } from './components/draft-template-widget
     MatButtonModule,
     MatInputModule,
     ReactiveFormsModule,
+    FormsModule,
     MatSelectModule,
     MatFormFieldModule,
     MatIconModule,
@@ -45,14 +48,16 @@ import { DraftTemplateWidgetComponent } from './components/draft-template-widget
     MatSliderModule,
     MatSlideToggleModule,
     MatSnackBarModule,
-    MatTooltipModule
+    MatTooltipModule,
   ],
   declarations: [
     DynamicFormComponent,
     PopupDialogComponent,
     ToastMessageComponent,
     AppBarComponent,
-    DraftTemplateWidgetComponent
+    DraftTemplateWidgetComponent,
+    InputChipComponent,
+    InputDialogueBoxComponent
   ],
   exports: [
     DynamicFormComponent,
@@ -60,6 +65,9 @@ import { DraftTemplateWidgetComponent } from './components/draft-template-widget
     MatSnackBarModule,
     AppBarComponent,
     DraftTemplateWidgetComponent,
+    InputChipComponent,
+    InputDialogueBoxComponent
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -11,7 +11,6 @@ class User:
         self.created = datetime.datetime.now()
 
     def save(self):
-        print(db.users.insert_one({'email': self.email, 'password': self.password, 'username': self.username, 'roles': self.roles, 'created': self.created}))
         return db.users.insert_one({'email': self.email, 'password': self.password, 'username': self.username, 'roles': self.roles, 'created': self.created})
 
     @staticmethod

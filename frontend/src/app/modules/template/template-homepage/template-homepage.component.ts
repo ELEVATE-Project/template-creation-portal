@@ -24,10 +24,10 @@ ngOnInit(): void {
 
 
 navigateToCreateTemplatePage() {
-  if(this.selected == 'Program Template'){
+  if(this.selected != "None"){
   this.router.navigate(['/template/template-creation'], {queryParams:{type:this.selected}});
 }else{
-  this.toastService.showMessage('Please Select Program Template Only');
+  this.toastService.showMessage('Please select a valid option');
 }
 }
 

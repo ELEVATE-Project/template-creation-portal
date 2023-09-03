@@ -58,7 +58,3 @@ def publishTemplate():
 @token_required
 def getTemplateInstruction():
     return TemplateController.getTemplateInstruction()
-
-@app.route('/api/v1/project-template', methods=['GET'])
-def getProjectTemplate():
-    return TemplateController.getProjectTemplate()

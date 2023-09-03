@@ -1,18 +1,20 @@
-<mat-card class="main-card">
-    <div style="display: flex; align-items: end;">
-    <p>50%</p>
-    <p>Program Template</p>
+<mat-card class="main-card" style="display: flex; align-items: center;">
+    <div style="display: flex; align-items: flex-end;">
+        <span style="margin: 0 10px 0 0; color: purple;">50%</span>
+        <span style="margin: 0;">Program Template</span>
     </div>
     <div style="display: flex;">
-        <mat-card class="icon-card" style="background-color: yellow; color: white ;">
-        <mat-icon class="material-symbols-outlined">
-            edit
-        </mat-icon>
-        </mat-card>
-    <mat-card class="icon-card" style="background-color: red; color: white;">
-        <mat-icon class="material-symbols-outlined">
-            delete
-        </mat-icon>
-    </mat-card>
-</div>
+        
+            <button (click)="editDraft()" style="background-color: darkorange; color: white; padding: 1px;">
+            <mat-icon class="material-symbols-outlined">
+                edit
+            </mat-icon>
+        </button>
+        
+            <button (click)="deleteDraft()" style="background-color: red; color: white; margin-left: 10px; padding: 1px;">
+            <mat-icon class="material-symbols-outlined">
+                delete
+            </mat-icon>
+        </button>
+    </div>
 </mat-card>

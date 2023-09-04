@@ -1,1 +1,22 @@
-<p>template-preview works!</p>
+<p>
+    <mat-toolbar color="primary">
+      <button mat-icon-button class="example-icon favorite-icon" (click)="backToHomePage()" >
+        <mat-icon>arrow_back
+        </mat-icon>
+      </button>
+      <span>Program Template</span>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>info</mat-icon>
+      </button>
+      <span class="example-spacer"></span>
+      <button mat-icon-button class="example-icon" aria-label="Save As Draft" (click)="saveAsDraft()">
+        <mat-icon>save_as</mat-icon>
+      </button>
+    </mat-toolbar>
+</p>
+
+<mat-card>
+  <table mat-table [dataSource]="dataSource">
+
+  </table>
+</mat-card>

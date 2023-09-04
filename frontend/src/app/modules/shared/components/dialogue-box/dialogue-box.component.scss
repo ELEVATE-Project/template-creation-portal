@@ -30,4 +30,10 @@ mat-label {
     color: $theme;
     background-color: $white;
     cursor: pointer;
-  }
+}
+
+.button-left {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

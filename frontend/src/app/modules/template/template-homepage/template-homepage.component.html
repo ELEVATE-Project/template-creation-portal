@@ -1,13 +1,11 @@
 <p>
     <mat-toolbar color="primary">
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
+      <button mat-icon-button class="example-icon favorite-icon" aria-label="logout-button" (click)="logout()">
+        <mat-icon>logout</mat-icon>
       </button>
       <span>Hello, </span>
       <span class="example-spacer"></span>
-      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="logout()">
-        <mat-icon>logout</mat-icon>
-      </button>
+      
     </mat-toolbar>
 </p>
 
@@ -39,7 +37,9 @@
       </div>
       </mat-card-header>
       <mat-card-content style="margin: 20px; flex-grow: 1; overflow: auto;">
-        <app-draft-template-widget></app-draft-template-widget>
+        <div *ngFor="let draftData of draftsData">
+          <app-draft-template-widget [draftTemplateData]='draftData'></app-draft-template-widget>
+        </div>
         </mat-card-content>
 
       </mat-card>

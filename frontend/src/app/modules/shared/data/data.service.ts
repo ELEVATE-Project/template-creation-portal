@@ -4,7 +4,7 @@ import { of as observableOf, throwError as observableThrowError, Observable, thr
 import { catchError, mergeMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ToastService } from 'src/app/core/services/toast/toast.service';
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from '../services/auth/authentication.service';
 
 @Injectable({
   providedIn: 'root'

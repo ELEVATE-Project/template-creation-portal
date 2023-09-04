@@ -1,20 +1,19 @@
 from datetime import datetime
-
-from bson import ObjectId
-
 from app import db
 from app.helpers import TEMPLATE_STATUS
 
-
 class Template:
-    def __init__(self, template_name, user_id, ):
+    def __init__(self, template_name, template_code, data ):
         self.template_name = template_name
-        self.user_id = user_id
+        self.template_code = template_code
+        self.data = data
         self.created = datetime.now()
 
     def save(self):
-        return db.templates.insert_one({'template_name': self.template_name, 'user_id': ObjectId(self.user_id), 'created': self.created})
-
+        tmp = db.templates.insert_one({'template_name': self.template_name, 'created': self.created, 'template_code': self.template_code, 'data': self.data})
+        print(tmp.inserted_id)
+        return tmp.inserted_id
+    
     @staticmethod
     def update(template_id, payload):
         payload.update = datetime.now()
@@ -27,3 +26,7 @@ class Template:
     @staticmethod
     def find_by_id(templated_id):
         return db.templates.find_one({'_id': templated_id})
+    
+    @staticmethod
+    def find_many_by_user_id(user_id):
+        return list(db.templates.find({}))

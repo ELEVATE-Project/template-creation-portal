@@ -12,6 +12,7 @@ import { AppBarComponent } from '../shared/components/app-bar/app-bar.component'
 import { TemplateCreationComponent } from './template-creation/template-creation.component';
 import { MatStepperModule } from "@angular/material/stepper";
 import { TemplatePreviewComponent } from './template-preview/template-preview.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { TemplatePreviewComponent } from './template-preview/template-preview.co
     TemplateRoutingModule,
     MatTooltipModule,
     SharedModule,
+    MatTableModule,
     MatProgressSpinnerModule,
     MatIconModule,
     FlexLayoutModule,

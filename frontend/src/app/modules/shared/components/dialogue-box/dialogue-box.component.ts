@@ -11,5 +11,12 @@ export class InputDialogueBoxComponent implements OnInit {
   constructor(private dialogRef: MatDialogRef<InputDialogueBoxComponent>, @Inject(MAT_DIALOG_DATA) public dialogueData: any) { }
 
   ngOnInit(): void {
+    
+  }
+
+  onOkClick = this.dialogueData.okButtonCallBack;
+
+  closeDialog(): void {
+    this.dialogRef.close();
   }
 }

@@ -15,10 +15,8 @@ class User:
 
     @staticmethod
     def find_by_email(email):
-        print(db.users.find_one({'email': email}))
         return db.users.find_one({'email': email})
 
     @staticmethod
     def find_by_id(user_id):
-        print(db.users)
         return db.users.find_one({'_id': user_id})

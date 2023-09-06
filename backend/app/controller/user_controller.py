@@ -38,12 +38,8 @@ class UserController:
     def login():
         try:
             data = request.get_json()
-            print(data)
             email = data['email']
-            print(email)
             password = hashlib.md5(data['password'].encode('utf-8')).hexdigest()
-            print(password)
-
 
             if not UserValidator.is_valid(email, password):
                 return error_response('Invalid email or password', 400)

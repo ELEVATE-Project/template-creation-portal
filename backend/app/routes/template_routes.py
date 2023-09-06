@@ -20,7 +20,6 @@ def getTemplate():
 @app.route('/api/v1/templates/all', methods=['GET'])
 # @token_required
 def getAllTemplates():
-    print("hersdsdsde")
     return TemplateController.getAllTemplates()
 
 

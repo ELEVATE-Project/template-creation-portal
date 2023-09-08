@@ -15,8 +15,26 @@
     </mat-toolbar>
 </p>
 
-<mat-card>
-  <table mat-table [dataSource]="dataSource">
-
-  </table>
+<mat-card style="padding: 20px;"> 
+  <label for="sheet-selector">Select a Sheet:</label>
+  <select id="sheet-selector" (change)="onSheetChange($event)">
+    <option *ngFor="let sheetName of sheetNames" [value]="sheetName">{{ sheetName }}</option>
+  </select>
+  
+  <!-- Display the selected sheet -->
+  <div *ngIf="templateData">
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let program of selectedSheetData[0] | keyvalue">{{ program.key }}</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let program of selectedSheetData">
+        <td *ngFor="let prop of program | keyvalue">{{ prop.value }}</td>
+      </tr>
+    </tbody>
+    </table>
+  </div>
+  
 </mat-card>

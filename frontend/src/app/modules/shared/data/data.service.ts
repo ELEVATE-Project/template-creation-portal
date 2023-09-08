@@ -26,6 +26,14 @@ export class DataService {
     return this.http.get(this.baseUrl + requestParam.url,{params:params,headers:requestParam.headers}).pipe(catchError(this.handleError.bind(this)));
   }
 
+  delete(requestParam: any, params?:HttpParams): Observable<any> {
+    return this.http.delete(this.baseUrl + requestParam.url, {params:params,headers:requestParam.headers}).pipe(catchError(this.handleError.bind(this)));
+  }
+
+  put(requestParam: any, params?:HttpParams): Observable<any> {
+    return this.http.put(this.baseUrl + requestParam.url,requestParam.data, {params:params,headers:requestParam.headers}).pipe(catchError(this.handleError.bind(this)));
+  }
+
   handleError(error: HttpErrorResponse) {
     // Handle the HTTP error here
 

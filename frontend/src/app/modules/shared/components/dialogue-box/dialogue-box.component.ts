@@ -14,7 +14,9 @@ export class InputDialogueBoxComponent implements OnInit {
     
   }
 
-  onOkClick = this.dialogueData.okButtonCallBack;
+  onOkClick = () => {this.dialogueData.okButtonCallBack(this.data)};
+
+
 
   closeDialog(): void {
     this.dialogRef.close();

@@ -24,6 +24,7 @@
     "file-saver": "^2.0.5",
     "lodash-es": "^4.17.21",
     "moment": "^2.29.4",
+    "ngx-clipboard": "^16.0.0",
     "ngx-toastr": "^17.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

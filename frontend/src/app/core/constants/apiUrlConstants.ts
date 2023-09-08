@@ -5,5 +5,7 @@ export const API_CONSTANTS = {
     CREATE_TEMPLATE: 'create-template',
     TEMPLATE_FORM: 'template-form',
     SAVE_TEMPLATE: 'template',
+    DELETE_TEMPLATE: 'template',
+    UPDATE_TEMPLATE_FILENAME: 'template/filename',
     ALL_DRAFT_TEMPLATE: 'templates/all'
 }

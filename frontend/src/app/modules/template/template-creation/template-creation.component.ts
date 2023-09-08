@@ -50,12 +50,14 @@ convertToTitleCase(arg0: any) {
   isMaximized = true;
   templateId!: string;
   draftData: any;
+  isSaved: boolean = false;
 
   constructor(private router: Router, private dataService: DataService, private templateService: TemplateService, private route: ActivatedRoute, private excelService: XlsxServiceService, private localStorage: LocalStorageService, private dialog: MatDialog) {
     
   }
   ngAfterViewInit(): void {
   }
+
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
     this.type = params.get('type')
@@ -64,7 +66,6 @@ convertToTitleCase(arg0: any) {
 
   });
     this.getTemplateDetails();
-    // const retrievedData = JSON.parse(localStorage.getItem('formData'));
 
   }
 
@@ -94,6 +95,9 @@ convertToTitleCase(arg0: any) {
           mockTemplateData.push({"name": element.name, "formsData": {"controls": element.columns}, "multipleRowsAllowed": element.multipleRowsAllowed, "required": element.required});
         });
         if(!_.isEmpty(this.draftData)){
+          if(this.draftData.template_name){
+          this.fileName = this.draftData.template_name ;}
+
         this.mergeDraftValues(mockTemplateData);
        }
         this.templateData = mockTemplateData
@@ -122,7 +126,9 @@ convertToTitleCase(arg0: any) {
   }
 
   getTemplateDataFromLocal() {
+    if(this.templateId){
     this.draftData = this.getLocalStorageData(`${localKeys.TEMPLATE_DATA}`+this.templateId);
+  }
   }
 
   getLocalStorageData(key: string): any {
@@ -130,7 +136,7 @@ convertToTitleCase(arg0: any) {
     return item ? JSON.parse(item) : null;
   }
 
-  saveTemplate(){
+  saveTemplate(filename?:string){
     var sheetsRowData: any = [];
     this.sheets.forEach((i, index) => {
       var sheet_name: string = this.templateData[index].name;
@@ -141,8 +147,10 @@ convertToTitleCase(arg0: any) {
     var data: any = {
       'template_name': this.fileName,
       'template_code': this.templateCode,
-      'data': sheetsRowData
+      'data': sheetsRowData,
+      'filename': filename ?? this.fileName
     }
+
 
     this.templateService.saveTemplate(data).subscribe(async (pp: any) => {
       pp.then(
@@ -150,7 +158,7 @@ convertToTitleCase(arg0: any) {
           this.templateId = response.data.template_id
         }
       ).catch((e:any) => (console.error(e)))
-      // this.router.navigate(['/template/template-preview'], {queryParams:{template_code: this.templateCode, template_id: this.templateId}})
+      
     });
   }
 
@@ -159,18 +167,22 @@ convertToTitleCase(arg0: any) {
       this.stepper.next();
     }
     else {
+      if(this.draftData){}
+      else{
      this.saveTemplate();
+    }
+    // this.router.navigate(['/template/template-preview'], {queryParams:{template_code: this.templateCode, template_id: this.templateId}})
      this.exportAsExcel();
     }
   }
 
 
-  appendSheetsAndExport() {
+  appendSheetsAndExport(filename?: string) {
     this.sheets.forEach((i, index) => {
       this.excelService.appendSheet([i.myForm.value], this.templateData[index].name)
      })
     
-    this.excelService.saveExcelFile('DynamicFormExport');
+    this.excelService.saveExcelFile(filename ?? 'DynamicFormExport');
   }
 
 
@@ -179,6 +191,7 @@ convertToTitleCase(arg0: any) {
   }
 
   saveAsDraft() {
+   
     const dialogRef = this.dialog.open(InputDialogueBoxComponent, {
       data: {
         header: "Save Your Work-in-Progress",
@@ -187,17 +200,24 @@ convertToTitleCase(arg0: any) {
         buttonText: {
           ok: 'OK',
           cancel: 'CANCEL'
+        },
+        okButtonCallBack: (filename?: string) => {
+  
+          if(filename){
+            this.fileName = filename;
+          }
+          if(this.draftData){
+            // this.updateTemplate();
+          }else{
+            this.saveTemplate(filename);
+          }
+
+          this.isSaved = true;
         }
       },
       width: '800px'
     });
-
-    dialogRef.afterClosed().subscribe(
-      (chip) => {
-        if (chip && chip!=='') {
-         console.log(chip);
-        }
-      })
+    
   }
 
 
@@ -211,20 +231,22 @@ convertToTitleCase(arg0: any) {
           ok: 'OK',
           cancel: 'CANCEL'
         },
-        okButtonCallBack: () => {
-          this.appendSheetsAndExport();
+        okButtonCallBack: (filename?:string) => {
+          if(filename){
+          this.fileName = filename;
+          }
+
+          this.appendSheetsAndExport(filename);
         }
       },
       width: '800px'
     });
-
-    dialogRef.afterClosed().subscribe(
-        (chip) => {
-          // this.router.navigate(['/template/template-preview'], {queryParams:{template_code: this.templateCode, template_id: this.templateId}});
-        })
   }
 
   backToHomePage() {
+    if(this.isSaved){
+      this.router.navigate(['/template/template-homepage']);
+    }else{
     const dialogRef = this.dialog.open(InputDialogueBoxComponent, {
       data: {
         header: "Save Your Work-in-Progress",
@@ -234,17 +256,24 @@ convertToTitleCase(arg0: any) {
           ok: 'OK',
           cancel: 'CANCEL'
         },
-        okButtonCallBack: () => {
+        okButtonCallBack: (filename?: string) => {
+          if(filename){
+            this.fileName = filename;
+          }
+          if(this.draftData){
+          // this.updateTemplate();
+        }else{
+          this.saveTemplate(filename);
+        }
           this.router.navigate(['/template/template-homepage']);
+        },
+        cancelCallback: () => {
+          //nothing
         }
       },
       width: '800px'
     });
-
-    // dialogRef.afterClosed().subscribe(
-    //   (chip) => {
-    //     // this.router.navigate(['/template/template-homepage']);
-    //   })
+    }
   }
 
   

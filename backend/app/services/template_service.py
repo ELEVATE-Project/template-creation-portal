@@ -31,5 +31,15 @@ class TemplateService:
             template['_id'] = str(template['_id'])
 
         return templates
+    
+    @staticmethod
+    def update_template_filename(template_id,filename):
+        template = Template.update_filename(template_id,filename)
+        return template
+    
+    @staticmethod
+    def delete_template(template_id):
+        result = Template.delete_template(template_id)
+        return result
         
         

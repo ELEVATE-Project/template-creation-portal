@@ -28,14 +28,12 @@ def createTemplate():
     return TemplateController.createTemplate()
 
 
-@app.route('/api/v1/<user_id>/templates/<template_id>', methods=['PUT'])
-@token_required
-def updateTemplate():
-    return TemplateController.updateTemplate()
+@app.route('/api/v1/template/filename', methods=['PUT'])
+def updateTemplateFileName():
+    return TemplateController.updateTemplateFileName()
 
 
-@app.route('/api/v1/<user_id>/templates/<template_id>', methods=['DELETE'])
-@token_required
+@app.route('/api/v1/template', methods=['DELETE'])
 def deleteTemplate():
     return TemplateController.deleteTemplate()
 

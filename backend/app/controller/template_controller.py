@@ -46,12 +46,35 @@ class TemplateController:
 
 
     @staticmethod
-    def updateTemplate():
-        pass
+    def updateTemplateFileName():
+        try:
+            template_id = request.args.get('template_id')
+            data = request.get_json()
+            template_name = data['filename']
+            result = TemplateService.update_template_filename(template_id, template_name)
+            if result:
+                return  success_response(True, message='Template Filename updated successfully')
+            else:
+                return error_response('Template not found', 404)
+        except Exception as e:
+            error_message = str(e)
+            print(error_message, 500)
+            return error_response(error_message, 500)
 
     @staticmethod
     def deleteTemplate():
-        pass
+        try:
+            template_id = request.args.get('template_id')
+            result = TemplateService.delete_template(template_id)
+            if result.deleted_count == 1:
+                return  success_response(True, message='Template deleted successfully')
+            else:
+                return error_response('Template not found', 404)
+        except Exception as e:
+            error_message = str(e)
+            print(error_message, 500)
+            return error_response(error_message, 500)
+        
 
     @staticmethod
     def saveAsDraft():

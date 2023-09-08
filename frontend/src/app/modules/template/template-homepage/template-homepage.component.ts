@@ -15,6 +15,7 @@ interface DraftTemplateFields {
   _id: string;
   template_code: Number,
   template_name: string,
+  filename?: string,
   data: any
 
 }

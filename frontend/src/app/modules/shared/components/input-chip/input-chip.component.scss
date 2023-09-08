@@ -1,0 +1,56 @@
+@import "../../../../../variables";
+
+mat-chip.mat-standard-chip::after {
+    background: none !important;
+}
+.chip {
+    white-space: nowrap;
+    overflow: hidden;
+}
+mat-chip {
+    border: 1px solid $theme;
+}
+.add-chip {
+    background-color: $theme !important;
+    color: $white !important;
+}
+mat-icon {
+    font-size: 20px;
+    margin-right: 2px;
+    z-index: 1;
+}
+::placeholder {
+    color: var(--dark-grey);
+    opacity: 1;
+}
+  
+:-ms-input-placeholder {
+   color: var(--dark-grey);
+}
+  
+::-ms-input-placeholder {
+   color: var(--dark-grey);
+}
+
+input {
+    padding: 6px;
+}
+  mat-slide-toggle {
+    float: right;
+  }
+  .wrapper {
+    margin-top: 15px;
+  }
+.mat-chip-container {
+    max-width: 100%;
+}
+.mat-chip-remove.mat-icon{
+    min-width: 30px !important;
+}
+::ng-deep .mat-chip-list-wrapper {
+    justify-content: left;
+}
+
+::ng-deep .mat-standard-chip .mat-chip-remove, .mat-standard-chip .mat-chip-trailing-icon{
+    margin: 0%;
+}

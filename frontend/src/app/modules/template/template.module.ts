@@ -11,11 +11,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppBarComponent } from '../shared/components/app-bar/app-bar.component';
 import { TemplateCreationComponent } from './template-creation/template-creation.component';
 import { MatStepperModule } from "@angular/material/stepper";
+import { TemplatePreviewComponent } from './template-preview/template-preview.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
     TemplateHomePageComponent,
-    TemplateCreationComponent
+    TemplateCreationComponent,
+    TemplatePreviewComponent
   ],
   imports: [
     CommonModule,
@@ -23,6 +26,7 @@ import { MatStepperModule } from "@angular/material/stepper";
     TemplateRoutingModule,
     MatTooltipModule,
     SharedModule,
+    MatTableModule,
     MatProgressSpinnerModule,
     MatIconModule,
     FlexLayoutModule,

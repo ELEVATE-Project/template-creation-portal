@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../shared/services/authentication.service';
+import { AuthenticationService } from '../../shared/services/auth/authentication.service';
 import { ToastrService } from 'ngx-toastr';
 import { DynamicFormComponent } from '../../shared/components';
 import { LocalStorageService } from 'src/app/core/services/local-storage/local-storage.service';

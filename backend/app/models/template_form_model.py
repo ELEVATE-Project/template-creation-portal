@@ -19,6 +19,13 @@ class TemplateForm:
     def get_template(name):
         templateForm = db.templateForm.find_one({'name':name})
         return templateForm
+    
+    @staticmethod 
+    def get_template_by_code(template_code):
+        print(template_code)
+        TemplateForm = db.templateForm.find_one({'template_code': int(template_code)})
+        print(TemplateForm)
+        return TemplateForm
 
     
     

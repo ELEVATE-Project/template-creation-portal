@@ -1,0 +1,40 @@
+<p>
+    <mat-toolbar color="primary">
+      <button mat-icon-button class="example-icon favorite-icon" (click)="backToHomePage()" >
+        <mat-icon>arrow_back
+        </mat-icon>
+      </button>
+      <span>Program Template</span>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>info</mat-icon>
+      </button>
+      <span class="example-spacer"></span>
+      <button mat-icon-button class="example-icon" aria-label="Save As Draft" (click)="saveAsDraft()">
+        <mat-icon>save_as</mat-icon>
+      </button>
+    </mat-toolbar>
+</p>
+
+<mat-card style="padding: 20px;"> 
+  <label for="sheet-selector">Select a Sheet:</label>
+  <select id="sheet-selector" (change)="onSheetChange($event)">
+    <option *ngFor="let sheetName of sheetNames" [value]="sheetName">{{ sheetName }}</option>
+  </select>
+  
+  <!-- Display the selected sheet -->
+  <div *ngIf="templateData">
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let program of selectedSheetData[0] | keyvalue">{{ program.key }}</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let program of selectedSheetData">
+        <td *ngFor="let prop of program | keyvalue">{{ prop.value }}</td>
+      </tr>
+    </tbody>
+    </table>
+  </div>
+  
+</mat-card>

@@ -40,3 +40,5 @@ else:
 
 from app.routes import user_routes
 from app.routes import template_routes
+from app.routes import validation_routes
+from app.routes import condition_routes

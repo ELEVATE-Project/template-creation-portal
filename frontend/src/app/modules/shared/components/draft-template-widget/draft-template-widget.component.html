@@ -1,18 +1,35 @@
-<mat-card class="main-card">
-    <div style="display: flex; align-items: end;">
-    <p>50%</p>
-    <p>Program Template</p>
+<mat-card  *ngIf="draftTemplateData && displayChild" class="main-card" style="display: flex; align-items: center; margin: 10px;">
+    <div style="display: flex; align-items: flex-end;">
+        <span *ngIf="draftTemplateData && draftTemplateData.progress" style="margin: 0 10px 0 0; color: purple;">{{draftTemplateData.progress ?? '50%'}}</span>
+        <span *ngIf="draftTemplateData" style="margin: 0;">{{draftTemplateData.filename ??  draftTemplateData.template_name ?? 'Template Name'}}</span>
     </div>
     <div style="display: flex;">
-        <mat-card class="icon-card" style="background-color: yellow; color: white ;">
-        <mat-icon class="material-symbols-outlined">
-            edit
-        </mat-icon>
-        </mat-card>
-    <mat-card class="icon-card" style="background-color: red; color: white;">
-        <mat-icon class="material-symbols-outlined">
-            delete
-        </mat-icon>
-    </mat-card>
-</div>
+        
+
+        <button  mat-small-fab mat-icon-button (click)="shareTemplateLink()" style="background-color: green; color: white; size: 18px; ">
+            <mat-icon class="material-symbols-outlined">
+                share
+            </mat-icon>
+        </button>
+
+        <button  mat-small-fab mat-icon-button (click)="editDraft()" style="background-color: darkorange; color: white; size: 18px; margin-left: 10px;">
+            <mat-icon class="material-symbols-outlined">
+                edit
+            </mat-icon>
+        </button>
+
+        <button  mat-small-fab mat-icon-button (click)="previewTemplate()" style="background-color: green; color: white; size: 18px; margin-left: 10px; ">
+            <mat-icon class="material-symbols-outlined">
+                preview
+            </mat-icon>
+        </button>
+
+
+        
+            <button  mat-small-fab mat-icon-button  (click)="deleteDraft()"  style="background-color: #832215; color: white; margin-left: 10px; ">
+            <mat-icon class="material-symbols-outlined">
+                delete
+            </mat-icon>
+        </button>
+    </div>
 </mat-card>

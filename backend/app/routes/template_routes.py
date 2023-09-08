@@ -14,30 +14,26 @@ def getDraftTemplates():
 @app.route('/api/v1/template-form', methods=['GET'])
 # @token_required
 def getTemplate():
-    print("eeeeee")
     return TemplateFormController.getTemplateForm()
 
 
-@app.route('/api/v1/<user_id>/templates/', methods=['GET'])
-@token_required
+@app.route('/api/v1/templates/all', methods=['GET'])
+# @token_required
 def getAllTemplates():
     return TemplateController.getAllTemplates()
 
 
-@app.route('/api/v1/<user_id>/templates/', methods=['POST'])
-@token_required
+@app.route('/api/v1/template', methods=['POST'])
 def createTemplate():
     return TemplateController.createTemplate()
 
 
-@app.route('/api/v1/<user_id>/templates/<template_id>', methods=['PUT'])
-@token_required
-def updateTemplate():
-    return TemplateController.updateTemplate()
+@app.route('/api/v1/template/filename', methods=['PUT'])
+def updateTemplateFileName():
+    return TemplateController.updateTemplateFileName()
 
 
-@app.route('/api/v1/<user_id>/templates/<template_id>', methods=['DELETE'])
-@token_required
+@app.route('/api/v1/template', methods=['DELETE'])
 def deleteTemplate():
     return TemplateController.deleteTemplate()
 
@@ -54,11 +50,7 @@ def publishTemplate():
     return TemplateController.publishTemplate()
 
 
-@app.route('/api/v1/<user_id>/templates/', methods=['GET'])
+@app.route('/api/v1/<user_id>/templates-instruction', methods=['GET'])
 @token_required
 def getTemplateInstruction():
     return TemplateController.getTemplateInstruction()
-
-@app.route('/api/v1/project-template', methods=['GET'])
-def getProjectTemplate():
-    return TemplateController.getProjectTemplate()

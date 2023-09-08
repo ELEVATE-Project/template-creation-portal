@@ -3,9 +3,14 @@ from app.models import Template
 
 class TemplateService:
     @staticmethod
-    def create_template(template_name, user_id):
-        template = Template(template_name, user_id)
-        return template.save()
+    def create_template(template_name, template_code, data):
+        template = Template(template_name, template_code, data )
+        tmp_id = template.save()
+        if tmp_id:
+            tmp_id = str(tmp_id)
+            return tmp_id
+        else:
+            return None
 
     @staticmethod
     def update_template(template_id, payload):
@@ -20,5 +25,21 @@ class TemplateService:
         return Template.find_by_id(template_id)
 
     @staticmethod
-    def get_all_templates():
-        return Template.get_all_templates()
+    def get_all_templates(user_id):
+        templates = Template.find_many_by_user_id(user_id)
+        for template in templates:
+            template['_id'] = str(template['_id'])
+
+        return templates
+    
+    @staticmethod
+    def update_template_filename(template_id,filename):
+        template = Template.update_filename(template_id,filename)
+        return template
+    
+    @staticmethod
+    def delete_template(template_id):
+        result = Template.delete_template(template_id)
+        return result
+        
+        

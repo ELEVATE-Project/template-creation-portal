@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
-import {AuthenticationService} from "../../shared/services/auth/authentication.service";
+import {AuthenticationService} from "../../shared/services/authentication.service";
+import {DataService} from "../../shared/data/data.service";
+import {ToastrService} from "ngx-toastr";
 import { DynamicFormComponent } from '../../shared/components/dynamic-form/dynamic-form.component';
 import { LocalStorageService } from 'src/app/core/services/local-storage/local-storage.service';
 import { localKeys } from 'src/app/core/constants/localStorage.keys';
@@ -46,7 +48,7 @@ export class LoginComponent implements OnInit {
   
   formData :any= {controls: []}
   constructor(private router: Router,
-              private authService: AuthenticationService, private localStorage: LocalStorageService) { }
+              private authService: AuthenticationService,private toastr: ToastrService, private localStorage: LocalStorageService) { }
 
   ngOnInit() {
     var userLoggedIn : boolean = this.authService.isUserLoggedIn();
@@ -86,6 +88,8 @@ export class LoginComponent implements OnInit {
 
   goToRegister() {
     this.router.navigate(['/auth/register'])
+
+
   }
 
 }

@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/frontend/browser",
+            "outputPath": "dist/frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -35,9 +35,9 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-               },
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
@@ -93,60 +93,6 @@
             ],
             "scripts": []
           }
-        },
-        "server": {
-          "builder": "@angular-devkit/build-angular:server",
-          "options": {
-            "outputPath": "dist/frontend/server",
-            "main": "server.ts",
-            "tsConfig": "tsconfig.server.json"
-          },
-          "configurations": {
-            "production": {
-              "outputHashing": "media"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "sourceMap": true,
-              "extractLicenses": false,
-              "vendorChunk": true
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve-ssr": {
-          "builder": "@nguniversal/builders:ssr-dev-server",
-          "configurations": {
-            "development": {
-              "browserTarget": "frontend:build:development",
-              "serverTarget": "frontend:server:development"
-            },
-            "production": {
-              "browserTarget": "frontend:build:production",
-              "serverTarget": "frontend:server:production"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "prerender": {
-          "builder": "@nguniversal/builders:prerender",
-          "options": {
-            "routes": [
-              "/"
-            ]
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "frontend:build:production",
-              "serverTarget": "frontend:server:production"
-            },
-            "development": {
-              "browserTarget": "frontend:build:development",
-              "serverTarget": "frontend:server:development"
-            }
-          },
-          "defaultConfiguration": "production"
         }
       }
     }

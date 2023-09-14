@@ -5,5 +5,4 @@ export const localKeys = {
     REMEMBER_ME: 'rememberMe',
     FORM_VERSIONS: 'formVersions',
     USER_ID: 'userId',
-    TEMPLATE_DATA: 'templateData',
 }

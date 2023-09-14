@@ -1,55 +1,39 @@
 <p>
     <mat-toolbar color="primary">
-      <button mat-icon-button class="example-icon favorite-icon" (click)="backToHomePage()" aria-label="Example icon-button with heart icon">
-        <mat-icon>arrow_back
-        </mat-icon>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
       </button>
-      <span>{{fileName}}</span>
+      <span>Program Template</span>
       <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
         <mat-icon>info</mat-icon>
       </button>
       <span class="example-spacer"></span>
-      <button mat-icon-button class="example-icon" aria-label="Save As Draft" (click)="saveAsDraft()">
+      <button mat-icon-button class="example-icon favorite-icon" (click)="backToHomePage()" aria-label="Example icon-button with heart icon">
+        <mat-icon>arrow_back
+        </mat-icon>
+      </button>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
         <mat-icon>save_as</mat-icon>
       </button>
     </mat-toolbar>
-</p>
+  </p>
   
 
   <mat-card class="card-form">
     
-    <ng-container *ngIf="templateData">
-      <mat-stepper #stepper [(selectedIndex)]="currentStepIndex" [linear]="isLinear">
-      <div *ngFor="let sheetData of templateData; index as i" >
+    <ng-container *ngIf="formsData">
+      <mat-stepper #stepper [(selectedIndex)]="currentStepIndex">
+    <div *ngFor="let sheetData of formsData; index as i" >
         <mat-step [stepControl]="sheetData" >
-          <ng-template matStepLabel>  <div class="step-label-container">{{convertToTitleCase(sheetData.name)}}
-            <button *ngIf="sheetData.multipleRowsAllowed" mat-icon-button class="icon">
-            <mat-icon>add_circle</mat-icon>
-          </button></div></ng-template>
-          <mat-card style="padding: 20px;" [@cardAnimation]="isMaximized ? 'maximized' : 'shrunk'">
-            <div *ngIf="sheetData.multipleRowsAllowed" style="width: 100%;">
-              <div style=" display: flex; justify-content: space-between; align-items: center; padding: 0px 10px 10px 10px;">
-                <span>
-                   Row 1
-                </span>
-              <button mat-icon-button class="icon" (click)="toggleMaximize()">
-                <mat-icon>{{ isMaximized ? "expand_less" :"expand_more"}}</mat-icon>
-              </button>
-            </div>
-            </div>
-      <app-dynamic-form *ngIf="sheetData" [jsonFormData]="sheetData.formsData" #sheets></app-dynamic-form>
-      <button *ngIf="stepper" style="margin: 20px;" mat-raised-button color="primary"  [disabled]="!sheets.get(stepper.selectedIndex)?.myForm?.valid" (click)="proceedAndSubmit()">
-        {{ stepper.selectedIndex < templateData.length - 1 ? 'Next' : 'Submit' }}
-      </button>
-          </mat-card>
-      
-         
-        
+          <ng-template matStepLabel>{{convertToTitleCase(list[i])}}</ng-template>
+      <app-dynamic-form *ngIf="sheetData" [jsonFormData]="sheetData" #sheets></app-dynamic-form>
+    
     </mat-step>
     </div>
-    
   </mat-stepper>
   </ng-container>
   
-  
+  <button *ngIf="stepper" style="margin: 20px;" mat-raised-button color="primary"  [disabled]="!sheets.get(stepper.selectedIndex)?.myForm?.valid" (click)="proceedAndSubmit()">
+    {{ stepper.selectedIndex < formsData.length - 1 ? 'Next' : 'Submit' }}
+  </button>
 </mat-card>

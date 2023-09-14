@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DataService } from '../../data/data.service';
+import { DataService } from '../data/data.service';
 import { API_CONSTANTS } from 'src/app/core/constants/apiUrlConstants';
 import { LocalStorageService } from 'src/app/core/services/local-storage/local-storage.service';
 import { localKeys } from 'src/app/core/constants/localStorage.keys';

@@ -4,7 +4,7 @@ import { of as observableOf, throwError as observableThrowError, Observable, thr
 import { catchError, mergeMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ToastService } from 'src/app/core/services/toast/toast.service';
-import { AuthenticationService } from '../services/auth/authentication.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,14 +24,6 @@ export class DataService {
   get(requestParam: any, params?:HttpParams): Observable<any> {
     
     return this.http.get(this.baseUrl + requestParam.url,{params:params,headers:requestParam.headers}).pipe(catchError(this.handleError.bind(this)));
-  }
-
-  delete(requestParam: any, params?:HttpParams): Observable<any> {
-    return this.http.delete(this.baseUrl + requestParam.url, {params:params,headers:requestParam.headers}).pipe(catchError(this.handleError.bind(this)));
-  }
-
-  put(requestParam: any, params?:HttpParams): Observable<any> {
-    return this.http.put(this.baseUrl + requestParam.url,requestParam.data, {params:params,headers:requestParam.headers}).pipe(catchError(this.handleError.bind(this)));
   }
 
   handleError(error: HttpErrorResponse) {

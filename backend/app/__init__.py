@@ -10,7 +10,7 @@ from app.database import connectDb
 
 app = Flask(__name__)
 
-CORS(app)
+CORS(app,resources={r"/api/*": {"origins": "*"}})
 
 # get the base directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

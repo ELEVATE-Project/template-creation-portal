@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DataService } from '../../data/data.service';
+import { DataService } from '../data/data.service';
 import { API_CONSTANTS } from 'src/app/core/constants/apiUrlConstants';
 import { LocalStorageService } from 'src/app/core/services/local-storage/local-storage.service';
 import { localKeys } from 'src/app/core/constants/localStorage.keys';
@@ -41,7 +41,7 @@ export class AuthenticationService {
     const reqParam = {
       url: API_CONSTANTS.CREATE_ACCOUNT,
       headers:{
-        "admin-token":"somethingRandom",
+        "admin-token":"66ef86a736fa24b565d1bc6464b63555",
         "Content-Type":"application/json"
       },
       data: {

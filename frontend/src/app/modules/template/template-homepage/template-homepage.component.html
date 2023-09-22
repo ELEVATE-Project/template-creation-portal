@@ -1,11 +1,13 @@
 <p>
     <mat-toolbar color="primary">
-      <button mat-icon-button class="example-icon favorite-icon" aria-label="logout-button" (click)="logout()">
-        <mat-icon>logout</mat-icon>
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
       </button>
       <span>Hello, </span>
       <span class="example-spacer"></span>
-      
+      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      </button>
     </mat-toolbar>
 </p>
 
@@ -19,6 +21,7 @@
           <mat-option value="none">None</mat-option>
           <mat-option value="Program Template">Program Template</mat-option>
           <mat-option value="Project Template">Project Template</mat-option>
+          <mat-option value="Survey Template">Survey Template</mat-option>
         </mat-select>
       </mat-form-field>
     </mat-card-content>
@@ -31,15 +34,13 @@
 
     
     <mat-card>
-      <mat-card-header class="heading"><div style="display: flex; justify-items: center; align-items: center; margin-bottom: 5px;"> Draft / Completed Template 
+      <mat-card-header class="heading"><div style="display: flex; justify-items: center; align-items: center; margin-bottom: 5px;"> Draft Template 
         <mat-icon style="color: black; margin-left: 10px;">info</mat-icon>
 
       </div>
       </mat-card-header>
       <mat-card-content style="margin: 20px; flex-grow: 1; overflow: auto;">
-        <div *ngFor="let draftData of draftsData">
-          <app-draft-template-widget [draftTemplateData]='draftData'></app-draft-template-widget>
-        </div>
+        <app-draft-template-widget></app-draft-template-widget>
         </mat-card-content>
 
       </mat-card>

@@ -7,7 +7,6 @@ import { PopupDialogComponent } from '../popup-dialog/popup-dialog.component';
 import * as moment from 'moment';
 import { MatDatepickerControl, MatDatepickerPanel } from '@angular/material/datepicker';
 import { showFieldValidator } from 'src/app/core/utils';
-import { BehaviorSubject } from 'rxjs';
 
 
 interface JsonFormValidators {
@@ -84,9 +83,6 @@ export class DynamicFormComponent implements OnInit{
   dependedParentDate: any;
   picker: any;
   dependentFieldsLogic: dependentFields[] = [];
-  private formDataSubject = new BehaviorSubject<any>(null);
-  formData$ = this.formDataSubject.asObservable();
-
 
   constructor(private fb: FormBuilder, public dialog: MatDialog){}
 
@@ -235,10 +231,6 @@ export class DynamicFormComponent implements OnInit{
       this.dependedParent = control.dependedParent
       this.dependedParentDate = new Date(date.value);
     }
-  }
-
-  updateFormData(data: any) {
-    this.formDataSubject.next(data);
   }
   
 }

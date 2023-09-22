@@ -12,7 +12,6 @@ import {MaterialModule} from "./material.module";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import { CoreModule } from './core/core.module';
-import {provideClientHydration} from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -33,7 +32,7 @@ import {provideClientHydration} from '@angular/platform-browser';
     ToastrModule.forRoot(),
     CoreModule
   ],
-  providers: [provideClientHydration()],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

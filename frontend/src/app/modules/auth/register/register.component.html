@@ -1,11 +1,9 @@
   <div class="container" fxLayoutAlign="center stretch" fxLayout="column">
     <div fxLayout="column" fxLayoutAlign="center space-evenly">
       <mat-card>
-      <div>
-        <h1>
-          Get Started !
-        </h1>
-      </div>
+        <div class="centerLogo">
+          <img class="imgLogo" src="https://i0.wp.com/shikshalokam.org/wp-content/uploads/2021/06/elevate-logo.png?fit=1024%2C478&ssl=1"/>
+        </div>
       <div fxLayout="column" fxLayoutAlign="center">
         <div fxFlex="100" fxFlex.sm="80" fxFlex.xs="95" fxLayout="column">
           <app-dynamic-form [jsonFormData]="formData" #registerForm fxFlex="100" class="input" (onEnter)="onSubmit()"></app-dynamic-form>

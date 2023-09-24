@@ -2,45 +2,58 @@
 
 .auth-background {
     display: flex;
-    width: 70%;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    width: 100%; /* Full width */
     height: 100vh;
     background-image: url("../../../../assets/images/auth-background.jpg");
-    background-size:cover;
-    background-repeat:no-repeat;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-
 mat-card {
-    box-shadow: 0px 0px 8px 8px rgba(0, 0, 0, 0.1); 
-    padding: 0px 20px 40px 20px;
+  box-shadow: 0px 0px 8px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px; /* Adjust padding for smaller screens */
+  max-width: 500px; /* Limit card width for smaller screens */
+  width: 100%;
+  margin: 0 auto; /* Center-align the card horizontally */
 }
 
 .input {
-  margin: 10px;
+    margin: 10px;
 }
 
+.imgLogo {
+    height: 80px; /* Adjust logo size for smaller screens */
+    width: auto; /* Allow logo to scale with screen width */
+    display: block; /* Remove margin auto and center using text-align */
+    margin: 0 auto;
+}
 
 .container {
-    margin: auto;
-    padding: 10px;
-}
-.container h1 {
-  font-weight: bold;
-  text-align: center;
-  color: $theme;
+    margin: 0 5%; /* Add more margin for smaller screens */
+    padding: 20px; /* Adjust padding for smaller screens */
 }
 
-.wrapper{
-  padding-top: 3%;
+.container h1 {
+    font-weight: bold;
+    text-align: center;
+    color: $theme;
+}
+
+.wrapper {
+    padding-top: 3%;
 }
 
 .line {
-  flex: 1;
-}
-.text {
-  padding: 0 7%;
-}
-.remember-me {
-  margin: auto;
+    flex: 1;
 }
 
+.text {
+    padding: 0 5%; /* Adjust padding for smaller screens */
+}
+
+.remember-me {
+    text-align: center; /* Center the "Remember Me" text */
+    margin: 10px auto; /* Center the element */
+}
